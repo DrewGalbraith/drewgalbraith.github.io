@@ -1,1 +1,349 @@
 
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Drew Galbraith - Portfolio</title>
+    <link rel="icon" type="image/png" href="/favicons/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicons/favicon.svg" />
+    <link rel="shortcut icon" href="/favicons/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
+    <link rel="manifest" href="/favicons/site.webmanifest" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/styles.css" rel="stylesheet">
+    <script src="https://www.google.com/recaptcha/api.js?render=6LckPbsqAAAAAEqC0hVLX9u8tW1pW8A8mf2kwnvx" async defer></script>
+</head>
+
+<body>
+    <div id="mobile-menu-open" class="shadow-large">
+        <i class="fa fa-bars" aria-hidden="False"></i>
+    </div>
+    <!-- End #mobile-menu-toggle -->
+    <header>
+        <div id="mobile-menu-close">
+            <span>Close</span> <i class="fa fa-times" aria-hidden="true"></i>
+        </div>
+        <ul id="menu" class="shadow">
+            <li>
+                <a href="#about">About</a>
+            </li>
+            <li>
+                <a href="#experience">Experience</a>
+            </li>
+            <li>
+                <a href="#education">Education</a>
+            </li>
+<!--             <li> -->
+<!--                 <a href="#projects">Projects</a> -->
+<!--             </li> -->
+<!--             <li> -->
+<!--                 <a href="#skills">Skills</a> -->
+<!--             </li> -->
+            <li>
+                <a href="#contact">Contact</a>
+            </li>
+        </ul>
+    </header>
+
+    <style>
+        header {
+            background-color: transparent;
+            color: #74b9e4;
+        }
+    
+        header ul#menu li a {
+            color: white;
+            text-decoration: none;
+        }
+    
+        header ul#menu li a:hover {
+            color: #b0aeae; /* Optional: Slightly lighter color on hover */
+        }
+    </style>
+    
+    <!-- End header -->
+
+    <div id="lead">
+        <div id="lead-content">
+            <h1>Drew Galbraith</h1>
+            <h2>CS PhD Student | ML Emphasis</h2>
+            <a href="/resume/Resume_Drew_Galbraith.pdf" class="btn-rounded-white">View Resume</a>
+        </div>
+        <!-- End #lead-content -->
+
+        <div id="lead-overlay"></div>
+
+        <div id="lead-down">
+            <span>
+                <i class="fa fa-chevron-down fa-3x" aria-hidden="true"></i>
+            </span>
+        </div>
+
+        <style>
+        .lead-overlay {
+            display: inline-block; /* Ensures the circle wraps the icon */
+            position: relative; /* Positions the circle around the icon */
+            width: 3em; /* Relative to font size (adjust as needed) */
+            height: 3em; /* Same as width for a perfect circle */
+            background-color: lightgray; /* Circle's color */
+            border-radius: 50%; /* Makes the element round */
+        }
+        
+        .lead-overlay {
+            position: absolute; /* Centers the icon within the circle */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: inherit; /* Ensures the icon scales with the circle */
+        }
+        </style>
+
+        <!-- End #lead-down -->
+    </div>
+    <!-- End #lead -->
+
+    <div id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h2 class="heading">About Me</h2>
+		    <img src="images/dg.jpeg" class="profile-pic" alt="Profile Picture" />
+                </div>
+                <div class="col-md-8">
+                    <p>
+			<u>My Background</u>
+			<br>
+			My name is Drew Galbraith. I study large language models (LLMs). I also have a degree in linguistics, and though I focus on ML today, 
+			 I maintain a healthy fascination for socio- and neurolingiustics (e.g. language prestige/stigmatization or using EEG to map linguistic events in the brain).
+			While involved in these spaces as an undergrad, I was introduced to natural language processing (NLP) where I discovered I had a knack for manipulating text and for programming generally. I began
+			investing a lot into my technical skills, including joining a univesity lab to research LLMs.
+			<br>
+			<br>
+			<u>My Philosophy</u>
+			<br>
+			Ultimately, I want to use LLMs to lift the lives of those least advantaged by technology. Dr. David Wingate aptly
+			said that "these technologies take [my life and your life] from an 8 to an 8.7; but they could also take the life of someone in poverty, someone
+			lacking a formal education, or someone who doesn't have code documentation in their language, etc. from a 3 to a 7." <br> That's the technology I want 
+			to make. A key point of my approach is contributing to open research, open code, and open model artifacts. Open source, as PyTorch founder Soumith 
+			Chintala described, is the best way to level the playing field (he's one of my tech heroes).
+			<br>
+			<br>
+			<u>Extra, Extra!</u>
+			<br>
+			In my free time, I like paddle sports, reading from my <a href="#">book list</a>, and playing guitar. I also enjoy trying to solve games I like 
+			with my growing knowledge of algorithms, though doing so tends to ruin the games for me. Check out my blog to read about some of my <a href="#">projects</a>
+			and feel free to <a href="#contact">reach out</a>! I'm also considering putting my interest in games to use by developing one for Yucata. Thoughts?
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End #about -->
+	
+
+    <div id="experience" class="background-alt">
+        <h2 class="heading">Experience</h2>
+        <div id="experience-timeline">
+            <div data-date="Dec. 2022 – Present">
+                <h3>BYU DRAGN Labs</h3>
+                <h4>Graduate/Undergraduate Researcher | <a href="https://dragn.ai/">Lab Site</a></h4>
+                <ul>
+			<li>
+                		Led several small research teams (1-4 people) exploring various mechanisms underlying LLMs including retrieval-augmented generation control and properties of transformer-alternative architectures.
+                	</li>
+		</ul>
+            </div>
+
+            <div data-date="May 2024 – Aug. 2024">
+                <h3>UMD ARLIS (Applied Research Laboratory for Intelligence and Security)</h3>
+                <h4>LLM Research Intern | <a href="https://www.arlis.umd.edu/">ARLIS Site</a></h4>
+                <ul>
+			<li>
+                		Led a small team in analyzed current research and then desigining and delivering an LLM research tool, including automated evaluation.
+                	</li>
+		</ul>
+            </div>
+	
+	    <div data-date="Sept. 2023 – May 2024">
+                <h3>BYU Computer Science Deptartment</h3>
+                <h4>Teaching Assistant</h4>
+                <ul>
+			<li>
+                		Assisted professor in course designing and teaching an upper-division course.
+			</li>
+			<li>
+				Mentored 17 students in language modelling concepts and research design.
+			</li>
+                </ul>
+	    </div>
+		
+            <div data-date="Oct. 2021 – Sept. 2022">
+                <h3>BYU Neurolinguistics Lab</h3>
+                <h4>Research Assistant</h4>
+                <ul>
+			<li>
+                    		Designed EEG experiment to examine linguistic phenomena among multilingual speakers.
+			</li>
+		</ul>
+            </div>
+        </div>
+    </div>
+    <!-- End #experience -->
+
+    <div id="education">
+        <h2 class="heading">Education</h2>
+        <div class="education-block">
+            <h3>Brigham Young University</h3>
+            <span class="education-date">Sept 2024 - Dec 2027</span>
+            <h4>MS/PhD of Computer Science</h4>
+            <p>
+		    Researching LLMs, specifically fine-grained control of RAG and Transformer-alternative LLM architectures (see 'Projects' for more).
+            </p>
+        </div>
+        <!-- End .education-block -->
+
+        <div class="education-block">
+            <h3>Brigham Young University</h3>
+            <span class="education-date">June 2020 - April 2024</span>
+            <h4>Bachelor of Linguistics | Computing Minor | 3.7 GPA</h4>
+            <ul>
+                <li>
+                    Emphasis on natural language and text processing.
+                </li>
+                <li>
+                    Experience with neurolinguistics and EEG.
+                </li>
+                <li>
+                    Work with AAVE text processing
+                </li>
+            </ul>
+        </div>
+        <!-- End .education-block -->
+    </div>
+    <!-- End #education -->
+	
+<!--     <div id="projects" class="background-alt">
+        <h2 class="heading">Projects</h2>
+        <div class="container">
+            <div class="row">
+                <div class="project shadow-large">
+                    <div class="project-image">
+                        <img src="images/project.jpg" />
+                    </div>
+                    <!-- End .project-image -->
+<!--                     <div class="project-info"> -->
+<!--                         <h3>Project Name Here</h3> -->
+<!--                         <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur in iaculis ex. Etiam volutpat laoreet urna. Morbi ut tortor nec nulla commodo malesuada sit amet vel lacus. Fusce eget efficitur libero. Morbi dapibus porta quam laoreet placerat.
+                        </p>
+                        <a href="#">View Project</a> -->
+<!--                     </div>
+                    <!-- End .project-info -->
+<!--                 </div> -->
+<!--                 End .project -->
+
+<!--                 <div class="project shadow-large"> -->
+<!--                     <div class="project-image"> -->
+<!--                         <img src="images/project.jpg" /> -->
+<!--                     </div> -->
+                    <!-- End .project-image -->
+<!--                     <div class="project-info"> -->
+<!--                         <h3>Project Name Here</h3> -->
+<!--                         <p> -->
+<!--                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur in iaculis ex. Etiam volutpat laoreet urna. Morbi ut tortor nec nulla commodo malesuada sit amet vel lacus. Fusce eget efficitur libero. Morbi dapibus porta quam laoreet placerat. -->
+<!--                         </p> -->
+<!--                         <a href="#">View Project</a> -->
+<!--                     </div> -->
+                    <!-- End .project-info -->
+<!--                 </div> --> -->
+                <!-- End .project -->
+<!--             </div> -->
+<!--         </div> -->
+<!--     </div> -->
+    <!-- End #projects -->
+
+    <div id="skills">
+        <h2 class="heading">Skills</h2>
+        <ul>
+            <li>Machine Learning</li>
+            <li>Language Modeling</li>
+            <li>AWS</li>
+            <li>Linux</li>
+            <li>Python</li>
+            <li>C++</li>
+            <li>Git</li>
+            <li>GitHub</li>
+            <li>Corpus Analysis</li>
+            <li>Text Processing</li>
+            <li>NLP</li>
+            <li>SLURM</li>
+            <li>Bash</li>
+        </ul>
+    </div>
+    <!-- End #skills -->
+
+    <div id="contact">
+    <h2>Get in Touch</h2>
+    <div id="contact-form">
+        <form method="POST" action="https://formspree.io/f/xzzzqlqp">
+            <input type="hidden" name="_subject" value="Contact request from personal website" />
+            <input type="email" name="_replyto" placeholder="Your email" required>
+            <textarea name="message" placeholder="Message" required></textarea>
+	<button class="g-recaptcha" 
+        data-sitekey="6LckPbsqAAAAAEqC0hVLX9u8tW1pW8A8mf2kwnvx" 
+        data-callback='onSubmit' 
+        data-action='submit'>Submit
+	</button>
+            
+            <!-- Google reCAPTCHA -->
+            <div class="g-recaptcha" data-sitekey="6LckPbsqAAAAAEqC0hVLX9u8tW1pW8A8mf2kwnvx"></div>
+            
+<!--             <button type="submit">Send</button>
+        </form> -->
+    </div>
+    </div>
+
+        <!-- End #contact-form -->
+    </div>
+    
+    <script>
+   function onSubmit(token) {
+     document.getElementById("contact-form").submit();
+   }
+    </script>
+    <!-- End #contact -->
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-5 copyright">
+                    <p>
+                        Copyright &copy; <span id="current-year">2025</span> Drew Galbraith
+                    </p>
+                </div>
+                <div class="col-sm-2 top">
+                    <span id="to-top">
+                        <i class="fa fa-chevron-up  fa-3x" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <div class="col-sm-5 social">
+                    <ul>
+                        <li><a href="https://github.com/DrewGalbraith" target="_blank"><i class="fa fa-github fa-2x" aria-hidden="true"></i></a></li>
+                        <li><a href="https://www.linkedin.com/in/drew-galbraith-profile/" target="_blank"><i class="fa fa-linkedin  fa-2x" aria-hidden="true"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- End footer -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/scripts.min.js"></script>
+</body>
+
+</html>
