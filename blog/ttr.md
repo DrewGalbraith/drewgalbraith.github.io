@@ -6,8 +6,12 @@ I got the classic game Ticket to Ride from my mother-in-law Christmas of '24. Th
 
 To be clear, there are different Ticket to Ride versions out there. This is the original 2004 version with 36 cities across North America and 45 trains per player. 
 
-As a quick recap, there are two ways to score points ([skip ahead](#thoughts) if you remember all this): 
+As a quick recap, there are two ways to score points ([skip ahead](#thoughts) if you remember all this):
 
+![The Ticket To Ride Board](../images/ttr_blog/ttr_board.tiff)  # TIFF file format unsupported in md
+
+
+![The Ticket To Ride Route Scoring Card](../images/ttr_blog/ttr_scoring_card.png)
 
 ## Approach
 Given there is something of a trade-off between the two scoring methods, let’s try optimizing for each to see where it leads us. We'll call these strategies [1](#strategy-1-routes) and [2](#strategy-2-missions), respectively, with an improved [2.5](#strategy-25-steiner-tree-w-updates) as well.
@@ -26,7 +30,7 @@ To complete a mission, we must connect two cities along a series of routes. Ther
 
 For this strategy to work, we must at least visit each of the 36 cities. Logically then, we will use at a minimum 35 of the 78 routes. That’s already <45% of all routes. But how many train cars will it require? More than the 45 allotted to us? To figure this out, we turn to our first real graph algorithm: the minimal spanning tree (MST). An MST is the shortest route to connect all points in a graph. Using the popular Kruskalls algorithm, we find that an MST for this graph costs 76 cars—much better than 256 trains, but still nearly double what we have. We can do better though. When we look at the missions, we see there are 6 cities that don’t appear on any cards: _Washington_, _Omaha_, _Las Vegas_, _Charleston_, _Raleigh_, and _Saint Louis_. Connecting these cities won’t get us more mission points, so we’ll prune them from the MST. The resulting tree is pictured below:
 
-![A Minimal Spanning Tree for Strategy 2](../images/ttr_MST.png)
+![A Minimal Spanning Tree for Strategy 2](../images/ttr_blog/ttr_MST.png)
 
 
 So let’s see how big of an MST we can get while still observing the 45-car limit. We will do this greedily, subtracting the most expensive terminal node and edge from the tree until we are compliant. We can take out the following 10 cities to get down to size: [Miami, San Francisco, Chicago, Los Angeles, Phoenix, New Orleans, Montreal, Boston, New York, Washington]. That leaves us covering over ⅔ of the used map with our MST. Now, this can likely be optimized further by removing the city that appears on the least mission cards first. For example, we are not cutting Los Angeles, which appears on 5 mission cards. I did not take this into account. But using ‘least mission cards disqualified per city pruned’ would be a stronger metric to prioritize pruning. This becomes a dynamic programming problem not unlike knapsack. Once our MST is built, our strategy will be to draw as many cards as possible as fast as possible and play them along the defined MST as fast as possible. Once complete, draw missions until the game ends, returning the few that require cities you don’t cover. (Luckily these are placed on the bottom!) 
