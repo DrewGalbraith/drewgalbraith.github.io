@@ -1,0 +1,38 @@
+# Ticket to Ride: A Graph Approach
+
+
+I got the classic game Ticket to Ride from my mother-in-law Christmas of '24. Though she’d never played it, she definitely picked right. This game was a staple in my family growing up, and having just completed a class on algorithms, all I could see was a big, juicy graph dying to be manipulated and analyzed. This blog is my result.
+
+
+To be clear, there are different Ticket to Ride versions out there. This is the original 2004 version with 36 cities across North America and 45 trains per player. 
+
+As a quick recap, there are two ways to score points ([skip ahead](#thoughts) if you remember all this): 
+
+
+## Approach
+Given there is something of a trade-off between the two scoring methods, let’s try optimizing for each to see where it leads us. We'll call these strategies [1](#strategy-1-routes) and [2](#strategy-2-missions), respectively, with an improved [2.5](#strategy-25-steiner-tree-w-updates) as well.
+
+
+### Strategy 1: Routes
+
+Say we shun the missions entirely and _only_ focus on placing cars on the highest scoring routes. With 45 cars, our best play would be 7 6-train routes ($6 \times 7 = 42$ trains) and a final 3-train route to get us to 45 trains and finish the game. The total score? $7 \times 15 = 105 + 1 \times 4 = 109$ points. That is not a bad score, but I’ve often done as well through normal gameplay. Besides, this assumes you can actually claim 7 of the 9 6-train routes. Additionally, it subtracts nothing for incomplete missions. If you got [incredibly lucky](#extra-math-p), you would draw 3 missions, keep only the 2 required and only draw the lowest scoring two to count against you. I also wouldn’t bank on getting the longest train this way, given you’ll max out at 24 sequential cars. So with 109 points minus the incomplete missions, **100 points** is the farthest this strategy can take us.
+
+
+What if we focus entirely on mission cards? 
+
+### Strategy 2: Missions
+
+To complete a mission, we must connect two cities along a series of routes. There are 78 routes, and while some have a doubled set of tracks, rules state we aren’t allowed to claim both tracks on a route; thus, so as far as we’re concerned, all routes are single-track routes). If we lay trains down on each route, we will have definitely connected all cities. Then we just have to draw missions each turn and rake in points. However, that endeavor costs us 256 trains, more than 5x what we’ve got. Placing on each route will give us a lot of redundancies. For example, if we connect Seattle to Vancouver and Vancouver to Calgary, we don’t also need to directly connect Seattle to Calgary, even though we can. So let’s optimize this strategy.
+
+For this strategy to work, we must at least visit each of the 36 cities. Logically then, we will use at a minimum 35 of the 78 routes. That’s already <45% of all routes. But how many train cars will it require? More than the 45 allotted to us? To figure this out, we turn to our first real graph algorithm: the minimal spanning tree (MST). An MST is the shortest route to connect all points in a graph. Using the popular Kruskalls algorithm, we find that an MST for this graph costs 76 cars—much better than 256 trains, but still nearly double what we have. We can do better though. When we look at the missions, we see there are 6 cities that don’t appear on any cards: _Washington_, _Omaha_, _Las Vegas_, _Charleston_, _Raleigh_, and _Saint Louis_. Connecting these cities won’t get us more mission points, so we’ll prune them from the MST. The resulting tree is pictured below:
+
+![A Minimal Spanning Tree for Strategy 2](../images/ttr_MST.png)
+
+
+So let’s see how big of an MST we can get while still observing the 45-car limit. We will do this greedily, subtracting the most expensive terminal node and edge from the tree until we are compliant. We can take out the following 10 cities to get down to size: [Miami, San Francisco, Chicago, Los Angeles, Phoenix, New Orleans, Montreal, Boston, New York, Washington]. That leaves us covering over ⅔ of the used map with our MST. Now, this can likely be optimized further by removing the city that appears on the least mission cards first. For example, we are not cutting Los Angeles, which appears on 5 mission cards. I did not take this into account. But using ‘least mission cards disqualified per city pruned’ would be a stronger metric to prioritize pruning. This becomes a dynamic programming problem not unlike knapsack. Once our MST is built, our strategy will be to draw as many cards as possible as fast as possible and play them along the defined MST as fast as possible. Once complete, draw missions until the game ends, returning the few that require cities you don’t cover. (Luckily these are placed on the bottom!) 
+
+### Strategy 2.5: Steiner Tree (w/ updates)
+To be written...
+
+#### Extra Math :P
+How about just a little more math? There are no mission cards made up of 2 6-train routes and a 3-train route, so our best bet focusing soley on claiming routes is to pick _Denver &lrarr; El Paso (4 pts)_ and _Kansas City &lrarr; Houston (5 pts)_. The odds of drawing these 2 cards in your three initial missions is $ \frac{All Favorable Outcomes}{All Possible Sets} $ (sets don't care about order!) of 3 missions. In regular English, with 30 mission cards, our numerator will contain every combination that has both  _Denver &lrarr; El Paso_ and _Kansas City &lrarr; Houston_. So we draw those two cards and are left with 28 different options for the third card. In short, there will be 28 different sets possible. For the denomenator, we want the total number of possible sets of three cards, which can be calculated with $ \binom{n}{r} = \frac{n!}{r!(n - r)!} $ Where $n$ is the number of options and $r$ is the number of mission we’re drawing. So $ \binom{30}{3} = \frac{30!}{3!(30 - 3)!} = 4060 $. Thus our probability of drawing both cards is $ \frac{2}{4060} $ or $ \frac{1}{145} $. That’s <0.7% chance of scoring 100 points with this strategy. Anyway, back to the [post](#strategy-1-routes).
