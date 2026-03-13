@@ -18,6 +18,29 @@
     // Remove no-js class
     $('html').removeClass('no-js');
 
+    // Rotate hero subtitles on the homepage.
+    var heroSubtitles = [
+        'Gradschool dropout',
+        'Web Developer',
+        'LLM Researcher',
+        'Linguist',
+        'Privacy Zealot',
+        'Budding Sci-Fi Fan',
+        'Board Game Lover',
+    ];
+    var $heroSubtitle = $('#hero-subtitle');
+    if ($heroSubtitle.length) {
+        var subtitleIndex = Math.floor(Math.random() * heroSubtitles.length);
+        $heroSubtitle.text(heroSubtitles[subtitleIndex]);
+
+        if (heroSubtitles.length > 1) {
+            window.setInterval(function() {
+                subtitleIndex = (subtitleIndex + 1) % heroSubtitles.length;
+                $heroSubtitle.text(heroSubtitles[subtitleIndex]);
+            }, 4000);
+        }
+    }
+
     // Animate to section when nav is clicked
     $('header a').click(function(e) {
         var heading = $(this).attr('href');
