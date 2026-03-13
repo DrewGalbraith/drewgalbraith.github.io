@@ -339,7 +339,7 @@ footer {
         content: '';
         top: 100%;
         height: 1px;
-        width: 50px;
+        width: 70%;
         left: 0;
         right: 0;
         margin: 0 auto;
@@ -398,6 +398,28 @@ footer {
 
 .page-grid {
     margin-top: 20px;
+}
+
+.check-me-out-wrap {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    overflow: visible;
+}
+
+.check-me-out {
+    margin-bottom: 30px;
+}
+
+.check-me-out-pointer {
+    font-size: 2em;
+    line-height: 1;
+}
+
+@media only screen and (max-width: 768px) {
+    .check-me-out-wrap {
+        justify-content: center;
+    }
 }
 
 .page-card {
