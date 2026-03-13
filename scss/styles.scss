@@ -394,6 +394,22 @@ footer {
     font-size: 1.1em;
 }
 
+#hero-subtitle {
+    display: block;
+    min-height: 1.3em;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+
+    &.is-transitioning-out {
+        opacity: 0;
+        transform: translateY(-12px);
+    }
+
+    &.is-transitioning-in {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+}
+
 .page-grid {
     margin-top: 20px;
 }

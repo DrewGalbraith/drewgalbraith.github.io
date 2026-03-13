@@ -18,7 +18,7 @@
     // Remove no-js class
     $('html').removeClass('no-js');
 
-    // Rotate hero subtitles on the homepage.
+    // Rotate hero subtitles on the homepage with a short slide/fade transition.
     var heroSubtitles = [
         'Gradschool dropout',
         'Web Developer',
@@ -35,8 +35,19 @@
 
         if (heroSubtitles.length > 1) {
             window.setInterval(function() {
-                subtitleIndex = (subtitleIndex + 1) % heroSubtitles.length;
-                $heroSubtitle.text(heroSubtitles[subtitleIndex]);
+                $heroSubtitle.addClass('is-transitioning-out');
+
+                window.setTimeout(function() {
+                    subtitleIndex = (subtitleIndex + 1) % heroSubtitles.length;
+                    $heroSubtitle
+                        .removeClass('is-transitioning-out')
+                        .addClass('is-transitioning-in')
+                        .text(heroSubtitles[subtitleIndex]);
+
+                    window.requestAnimationFrame(function() {
+                        $heroSubtitle.removeClass('is-transitioning-in');
+                    });
+                }, 250);
             }, 4000);
         }
     }

@@ -56,6 +56,9 @@ header.active{display:block}
 .subpage{background:#f2f2f5}
 .section-intro{max-width:720px;margin:0 auto 20px;color:#74808a;font-size:1.1em}
 .lead-copy{max-width:700px;margin:0 auto 25px;color:rgba(255,255,255,0.88);font-size:1.1em}
+#hero-subtitle{display:block;min-height:1.3em;transition:opacity .25s ease,transform .25s ease}
+#hero-subtitle.is-transitioning-out{opacity:0;transform:translateY(-12px)}
+#hero-subtitle.is-transitioning-in{opacity:0;transform:translateY(12px)}
 .page-grid{margin-top:20px}
 .check-me-out-wrap{display:inline-flex;align-items:center;gap:10px;overflow:visible}
 .check-me-out{margin-bottom:30px}
