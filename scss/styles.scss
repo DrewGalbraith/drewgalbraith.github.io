@@ -162,7 +162,7 @@ header {
 
     ul {
         display: inline-block;
-        background: $background;
+        background: transparent;
         text-align: center;
         padding: 10px;
         margin: 0;
@@ -176,18 +176,18 @@ header {
 
     a {
         display: block;
-        color: $base-color;
+        color: #fff;
         padding: 10px;
 
         &:hover {
-            color: $base-color-hover;
+            color: rgba(255, 255, 255, 0.75);
             text-decoration: none;
-            background: #eee;
+            background: rgba(255, 255, 255, 0.12);
             border-radius: 4px;
         }
 
         &:focus {
-            color: $base-color;
+            color: #fff;
             text-decoration: none;
         }
     }
@@ -196,10 +196,6 @@ header {
         display: block;
     }
 
-    &.sticky {
-        position: fixed;
-        z-index: 999;
-    }
 }
 
 .active-page {
