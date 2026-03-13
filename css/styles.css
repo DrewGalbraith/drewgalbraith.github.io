@@ -131,6 +131,9 @@ header.sticky{position:fixed;z-index:999}
     margin: 0 auto; /* Optional: Centers the image */
 }
 .profile-pic{float:left}
+.resume-frame-wrap{background:#fff;border-radius:8px;overflow:hidden}
+.resume-frame{display:block;width:100%;height:80vh;min-height:700px;border:0}
+.resume-actions{margin-top:20px;text-align:center}
 
 .project-info{position:absolute;top:50%;transform:translateY(-50%);margin-left:300px;padding:15px}
 .project-info h3{font-size:1.5em;font-weight:300;color:#374054;margin:0 0 15px 0}
