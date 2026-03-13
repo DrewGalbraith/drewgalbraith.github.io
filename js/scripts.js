@@ -20,17 +20,23 @@
 
     // Animate to section when nav is clicked
     $('header a').click(function(e) {
+        var heading = $(this).attr('href');
 
-        // Treat as normal link if no-scroll class
-        if ($(this).hasClass('no-scroll')) return;
+        // Treat page-to-page links as normal navigation.
+        if ($(this).hasClass('no-scroll') || !heading || heading.charAt(0) !== '#') {
+            return;
+        }
 
         e.preventDefault();
-        var heading = $(this).attr('href');
-        var scrollDistance = $(heading).offset().top;
+        var $target = $(heading);
+        if (!$target.length) {
+            return;
+        }
+        var scrollDistance = $target.offset().top;
 
         $('html, body').animate({
             scrollTop: scrollDistance + 'px'
-        }, Math.abs(window.pageYOffset - $(heading).offset().top) / 1);
+        }, Math.abs(window.pageYOffset - $target.offset().top) / 1);
 
         // Hide the menu once clicked if mobile
         if ($('header').hasClass('active')) {
@@ -47,7 +53,11 @@
 
     // Scroll to first element
     $('#lead-down span').click(function() {
-        var scrollDistance = $('#lead').next().offset().top;
+        var $next = $('#lead').next();
+        if (!$next.length) {
+            return;
+        }
+        var scrollDistance = $next.offset().top;
         $('html, body').animate({
             scrollTop: scrollDistance + 'px'
         }, 500);

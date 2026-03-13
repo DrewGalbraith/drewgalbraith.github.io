@@ -94,6 +94,14 @@ body {
     }
 }
 
+a {
+    color: $base-color;
+
+    &:hover {
+        color: $base-color-hover;
+    }
+}
+
 // No JS styles
 .no-js {
     #experience-timeline {
@@ -192,6 +200,10 @@ header {
         position: fixed;
         z-index: 999;
     }
+}
+
+.active-page {
+    font-weight: 700;
 }
 
 #menu {
@@ -337,6 +349,89 @@ footer {
 
 .background-alt {
     background: $background-alt;
+}
+
+.content-section,
+.page-body {
+    padding: 75px 15px;
+}
+
+#page-hero {
+    padding: 150px 15px 70px;
+    text-align: center;
+    background: linear-gradient(135deg, rgba($base-color-hover, 0.95), rgba($base-color, 0.82)), url(../images/oregon.jpeg) center/cover;
+    color: #fff;
+
+    h1 {
+        margin: 0 0 10px;
+        font-size: 4em;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+    }
+
+    p {
+        max-width: 720px;
+        margin: 0 auto;
+        font-size: 1.2em;
+        color: rgba(255, 255, 255, 0.88);
+    }
+}
+
+.subpage {
+    background: $background-alt;
+}
+
+.section-intro {
+    max-width: 720px;
+    margin: 0 auto 20px;
+    color: $text;
+    font-size: 1.1em;
+}
+
+.lead-copy {
+    max-width: 700px;
+    margin: 0 auto 25px;
+    color: rgba(255, 255, 255, 0.88);
+    font-size: 1.1em;
+}
+
+.page-grid {
+    margin-top: 20px;
+}
+
+.page-card {
+    display: block;
+    min-height: 220px;
+    margin-bottom: 30px;
+    padding: 30px 24px;
+    background: #fff;
+    border-radius: 6px;
+    text-decoration: none;
+    @include transition();
+
+    h3 {
+        margin-top: 0;
+        color: $heading;
+        font-size: 1.5em;
+    }
+
+    p {
+        margin: 0;
+        color: $text;
+    }
+
+    &:hover {
+        transform: translateY(-4px);
+        text-decoration: none;
+    }
+}
+
+.profile-pic {
+    max-width: 100%;
+    border-radius: 8px;
+    margin-top: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
 }
 
 /*
