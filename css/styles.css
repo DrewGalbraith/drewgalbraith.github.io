@@ -42,7 +42,7 @@ header.active{display:block}
 .top i{color:#74808a}.social{text-align:right}
 .social ul{margin:5px 0 0 0;padding:0}.social li{display:inline-block;font-size:1.25em;list-style:none}
 .social a{display:block;color:#74808a;padding:10px}.social a:hover{color:#3498db}
-.btn-rounded-white{display:inline-block;color:#fff;padding:15px 25px;border:4px solid #fff;border-radius:30px;transition:.5s ease all}
+.btn-rounded-white{display:inline-block;color:#fff;padding:15px 25px;border:4px solid #fff;border-radius:30px;background:rgba(18,38,68,0.35);box-shadow:0 10px 30px rgba(0,0,0,0.18);transition:.5s ease all}
 .btn-rounded-white:hover{color:#3498db;background:#fff;text-decoration:none}
 .shadow{box-shadow:0 1px 3px rgba(0,0,0,0.12),0 1px 2px rgba(0,0,0,0.24)}
 .shadow-large{box-shadow:0 3px 6px rgba(0,0,0,0.08),0 3px 6px rgba(0,0,0,0.15)}
@@ -67,8 +67,8 @@ header.active{display:block}
 #lead{position:relative;height:100vh;min-height:500px;max-height:1080px;background:url(../images/oregon.jpeg);background-size:cover;padding:15px;overflow:hidden}
 #lead-content{position:absolute;z-index:10;top:50%;left:50%;transform:translate(-50%, -50%);text-align:center}
 #lead-content h1,#lead-content h2{margin:0}
-#lead-content h1{color:#fff;font-weight:900;font-size:5em;text-transform:uppercase;letter-spacing:0.05em;line-height:0.9em}
-#lead-content h2{color:#fff;font-weight:500;font-size:2.25em;margin-bottom:15px;margin-top:10px}
+#lead-content h1{color:#fff;font-weight:900;font-size:5em;text-transform:uppercase;letter-spacing:0.05em;line-height:0.9em;text-shadow:0 4px 18px rgba(0,0,0,0.28)}
+#lead-content h2{color:#fff;font-weight:700;font-size:2.45em;margin-bottom:15px;margin-top:10px;text-shadow:0 3px 14px rgba(0,0,0,0.24)}
 #lead-overlay{position:absolute;height:100%;width:100%;top:0;right:0;bottom:0;left:0;background:#4d90fe63;z-index:1}
 #lead-down{position:absolute;left:0;right:0;width:100%;text-align:center;z-index:10;bottom:15px;color:#fff}
 #lead-down span{cursor:pointer;display:block;margin:0 auto;width:65px;height:65px;border-radius:50%;border:3px solid #a0cfee;text-align:center}
@@ -188,7 +188,7 @@ header.active{display:block}
     #lead{height:auto;min-height:auto;max-height:auto;padding:100px 15px}
     #lead-content{position:relative;transform:none;left:auto;top:auto}
     #lead-content h1{font-size:3em}
-    #lead-content h2{font-size:1.75em}
+    #lead-content h2{font-size:1.95em}
     #about{text-align:center}
     #about p{text-align:left}
 }
@@ -198,7 +198,7 @@ header.active{display:block}
     #mobile-menu-open,#mobile-menu-close{display:block}#menu{color:#fff;height:100%;overflow-y:auto;box-shadow:none;border-radius:0;width:100%}
     #menu li{display:block;margin-bottom:10px; background: #217dbb;}
     #lead-content h1{font-size:2em}
-    #lead-content h2{font-size:1.3em}
+    #lead-content h2{font-size:1.5em}
     #lead-content a{padding:10px 20px;border:3px solid #eee;}
     #lead-down{display:none}
     .check-me-out-wrap{justify-content:center}
@@ -212,6 +212,6 @@ header.active{display:block}
 
 @media only screen and (max-width: 480px){
     #lead-content h1{font-size:1.5em}
-    #lead-content h2{font-size:1em}
+    #lead-content h2{font-size:1.15em}
     #lead-content a{font-size:0.9em;padding:5px 10px;border:2px solid #eee}
 }

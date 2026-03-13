@@ -306,6 +306,8 @@ footer {
     padding: 15px 25px;
     border: 3px solid #fff;
     border-radius: 30px;
+    background: rgba(18, 38, 68, 0.35);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
     @include transition();
 
     &:hover {
@@ -507,13 +509,15 @@ footer {
         text-transform: uppercase;
         letter-spacing: 0.05em;
         line-height: 0.9em;
+        text-shadow: 0 4px 18px rgba(0, 0, 0, 0.28);
     }
 
     h2 {
         color: lighten($base-color, 25%);
-        font-weight: 500;
-        font-size: 2.25em;
+        font-weight: 700;
+        font-size: 2.45em;
         margin-bottom: 15px;
+        text-shadow: 0 3px 14px rgba(0, 0, 0, 0.24);
     }
 }
 
@@ -1023,7 +1027,7 @@ footer {
         }
 
         h2 {
-            font-size: 1.75em;
+            font-size: 1.95em;
         }
     }
 
@@ -1072,7 +1076,7 @@ footer {
         }
 
         h2 {
-            font-size: 1.3em;
+            font-size: 1.5em;
         }
 
         a {
@@ -1121,7 +1125,7 @@ footer {
         }
 
         h2 {
-            font-size: 1em;
+            font-size: 1.15em;
         }
 
         a {
