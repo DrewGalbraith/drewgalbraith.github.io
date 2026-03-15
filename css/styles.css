@@ -61,8 +61,8 @@ header.active{display:block}
 #hero-subtitle.is-transitioning-in{opacity:0;transform:translateY(12px)}
 .page-grid{margin-top:20px}
 .check-me-out-wrap{display:inline-flex;align-items:center;gap:10px;overflow:visible}
-.check-me-out{margin-bottom:30px}
-.check-me-out-pointer{font-size:2em;line-height:1}
+.check-me-out{margin:0}
+.check-me-out-pointer{font-size:2em;line-height:1;transform:translateY(2px)}
 .page-card{display:block;min-height:220px;margin-bottom:30px;padding:30px 24px;background:#fff;border-radius:6px;text-decoration:none;transition:.5s ease all}
 .page-card h3{margin-top:0;color:#374054;font-size:1.5em}
 .page-card p{margin:0;color:#74808a}
@@ -151,11 +151,11 @@ header.active{display:block}
 .project-info{position:relative;margin:0;padding:30px 15px;transform:none}
 #more-projects{display:none}
 
-#skills{padding:50px 15px;text-align:center}
-
-#skills h2{color:#374054;margin-bottom:50px}
-
-#skills ul{display:block;margin:0 auto;padding:0;max-width:800px}
+#skills{padding:50px 15px;text-align:left}
+#skills .skills-group{max-width:1100px;margin:0 auto 36px;display:flex;align-items:center;gap:36px}
+#skills .skills-group:last-child{margin-bottom:0}
+#skills h2{flex:0 0 220px;color:#374054;margin:0;text-align:center}
+#skills ul{flex:1 1 auto;display:block;margin:0;padding:0;text-align:center}
 
 #skills li{display:inline-block;margin:7px;padding:5px 10px;color:#374054;background:#e4e4ea;list-style:none;cursor:default;font-size:1.2em}
 #contact{padding:50px 15px;background:#4d90fe;text-align:center}
@@ -218,6 +218,9 @@ header.active{display:block}
     .project-info{position:relative;margin:0;padding:30px 15px;top:auto;transform:none}
     .footer{text-align:center}
     .social{text-align:center}
+    #skills{text-align:center}
+    #skills .skills-group{display:block;margin-bottom:28px}
+    #skills h2{margin:0 0 24px}
     .error-image-slot{flex-basis:420px}
     .error-home-link{display:inline-block}
 }
