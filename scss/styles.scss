@@ -471,6 +471,24 @@ footer {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
 }
 
+.about-entry {
+    margin-top: 28px;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+}
+
+.about-entry-reverse {
+    flex-direction: row-reverse;
+}
+
+.about-entry-image {
+    display: block;
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
 .resume-frame-wrap {
     background: #fff;
     border-radius: 8px;
@@ -1122,6 +1140,14 @@ footer {
         p {
             text-align: left;
         }
+    }
+
+    .about-entry {
+        display: block;
+    }
+
+    .about-entry-reverse {
+        flex-direction: initial;
     }
 
 }
