@@ -136,6 +136,13 @@ header.active{display:block}
 .resume-frame-wrap{background:#fff;border-radius:8px;overflow:hidden}
 .resume-frame{display:block;width:100%;height:80vh;min-height:700px;border:0}
 .resume-actions{margin-top:20px;text-align:center}
+.error-code{margin:0 0 12px;color:rgba(255,255,255,0.65);font-size:.95em;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.error-layout{display:flex;align-items:center;justify-content:center;gap:32px;max-width:1120px;margin:0 auto}
+.error-panel{flex:0 1 430px;padding:36px 32px;background:#fff;border-radius:8px}
+.error-heading{color:#374054;font-size:3em;font-weight:900;margin-bottom:24px}
+.error-home-link{background:rgba(18,38,68,0.58);backdrop-filter:blur(4px)}
+.error-image-slot{flex:0 1 520px;border-radius:8px;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.error-image{display:block;width:100%;height:auto}
 
 .project-info{position:absolute;top:50%;transform:translateY(-50%);margin-left:300px;padding:15px}
 .project-info h3{font-size:1.5em;font-weight:300;color:#374054;margin:0 0 15px 0}
@@ -211,6 +218,13 @@ header.active{display:block}
     .project-info{position:relative;margin:0;padding:30px 15px;top:auto;transform:none}
     .footer{text-align:center}
     .social{text-align:center}
+    .error-image-slot{flex-basis:420px}
+    .error-home-link{display:inline-block}
+}
+@media only screen and (max-width: 768px){
+    .error-layout{flex-direction:column;align-items:stretch}
+    .error-panel,.error-image-slot{flex-basis:auto}
+    .error-heading{font-size:2.35em}
 }
 
 @media only screen and (max-width: 480px){

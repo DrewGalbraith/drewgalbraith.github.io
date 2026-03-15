@@ -489,6 +489,59 @@ footer {
     text-align: center;
 }
 
+.error-code {
+    margin: 0 0 12px;
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 0.95em;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+.error-layout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    max-width: 1120px;
+    margin: 0 auto;
+}
+
+.error-panel {
+    flex: 0 1 430px;
+    padding: 36px 32px;
+    background: #fff;
+    border-radius: 8px;
+}
+
+.error-heading {
+    color: $heading;
+    font-size: 3em;
+    font-weight: 900;
+    margin-bottom: 24px;
+}
+
+.error-home-link {
+    background: rgba(18, 38, 68, 0.58);
+    backdrop-filter: blur(4px);
+}
+
+.error-image-slot {
+    flex: 0 1 520px;
+    border-radius: 8px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.error-image {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
 /*
     --------------------------
     ----- 4. Lead Styles -----
@@ -1130,6 +1183,30 @@ footer {
         text-align: center;
     }
 
+    .error-image-slot {
+        flex-basis: 420px;
+    }
+
+    .error-home-link {
+        display: inline-block;
+    }
+
+}
+
+@media only screen and (max-width : 768px) {
+    .error-layout {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .error-panel,
+    .error-image-slot {
+        flex-basis: auto;
+    }
+
+    .error-heading {
+        font-size: 2.35em;
+    }
 }
 
 // Extra Small Devices
