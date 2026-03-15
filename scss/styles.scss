@@ -794,6 +794,63 @@ footer {
     color: #374054;
 }
 
+.books-section {
+    max-width: 820px;
+    margin: 0 auto 48px;
+}
+
+#books {
+    padding: 0;
+    border-bottom: 1px solid $border;
+    text-align: center;
+
+    h2 {
+        color: $heading;
+        margin-bottom: 40px;
+    }
+}
+
+.books-block,
+.books-block-2 {
+    max-width: 820px;
+    margin: 0 auto 30px auto;
+    padding: 24px;
+    border: 1px solid $border;
+    border-radius: 8px;
+    background: #fff;
+    text-align: left;
+
+    h3 {
+        font-weight: 500;
+        float: left;
+        margin: 0;
+        color: $heading;
+    }
+
+    span {
+        color: $text;
+        float: right;
+    }
+
+    h4 {
+        color: $text;
+        clear: both;
+        font-weight: 500;
+        margin: 0 0 15px 0;
+    }
+
+    p,
+    ul {
+        margin: 0;
+        color: $text;
+        font-size: 0.9em;
+    }
+
+    ul {
+        padding: 0 0 0 15px;
+    }
+}
+
 /*
     -------------------------------
     ----- 7. Education Styles -----
@@ -1197,6 +1254,14 @@ footer {
 
     #lead-down {
         display: none;
+    }
+
+    .books-block,
+    .books-block-2 {
+        h3,
+        span {
+            float: none;
+        }
     }
 
     .education-block {

@@ -91,26 +91,15 @@ header.active{display:block}
 .vtimeline-point{position:relative;display:block;vertical-align:top;margin-bottom:30px}
 .vtimeline-icon{position:relative;color:#fff;width:50px;height:50px;background:#3498db;border-radius:50%;float:left;z-index:99;margin-left:280px}
 .vtimeline-icon i{display:block;font-size:2em;margin-top:10px}.vtimeline-date{width:260px;text-align:right;position:absolute;left:0;top:10px;font-weight:300;color:#374054}
-
-/* #books{position:relative;height:100vh;min-height:500px;max-height:1080px;background:url(../images/oregon.jpeg);background-size:cover;padding:15px;} */
-#books{background-image: linear-gradient(to bottom, white, black);padding:50px 15px 20px 15px;border-bottom:1px solid #dcd9d9;text-align:center}
-#books h2{color:#374054;margin-top:40px;margin-bottom:40px}
-
-.books-block{max-width:700px;margin:0 auto 30px auto;padding:15px;border:1px solid #dcd9d9;background:white;text-align:left}
-.books-block h3{font-weight:500;float:left;margin:0;color:#374054}
-.books-block span{color:#74808a;float:right}
-.books-block h4{color:#74808a;clear:both;font-weight:500;margin:0 0 15px 0}
-.books-block p,
-.books-block ul{margin:0;color:#74808a;font-size:0.9em}
-.books-block ul{padding:0 0 0 15px}#projects{padding:50px 15px;border-bottom:1px solid #dcd9d9;text-align:center}
-
-.books-block-2{max-width:700px;margin:0 auto 30px auto;padding:15px;border:1px solid #dcd9d9;background:#f2f2f5;text-align:left}
-.books-block-2 h3{font-weight:500;float:left;margin:0;color:#374054}
-.books-block-2 span{color:#74808a;float:right}
-.books-block-2 h4{color:#74808a;clear:both;font-weight:500;margin:0 0 15px 0}
-.books-block-2 p,
-.books-block-2 ul{margin:0;color:#74808a;font-size:0.9em}
-.books-block-2 ul{padding:0 0 0 15px}#projects{padding:50px 15px;border-bottom:1px solid #dcd9d9;text-align:center}
+.books-section{max-width:820px;margin:0 auto 48px}
+#books{padding:0;border-bottom:1px solid #dcd9d9;text-align:center}
+#books h2{color:#374054;margin-bottom:40px}
+.books-block,.books-block-2{max-width:820px;margin:0 auto 30px auto;padding:24px;border:1px solid #dcd9d9;border-radius:8px;background:#fff;text-align:left}
+.books-block h3,.books-block-2 h3{font-weight:500;float:left;margin:0;color:#374054}
+.books-block span,.books-block-2 span{color:#74808a;float:right}
+.books-block h4,.books-block-2 h4{color:#74808a;clear:both;font-weight:500;margin:0 0 15px 0}
+.books-block p,.books-block ul,.books-block-2 p,.books-block-2 ul{margin:0;color:#74808a;font-size:0.9em}
+.books-block ul,.books-block-2 ul{padding:0 0 0 15px}
 
 #education{padding:50px 15px 20px 15px;border-bottom:1px solid #dcd9d9;text-align:center}
 #education h2{color:#374054;margin-bottom:50px}
@@ -216,6 +205,7 @@ header.active{display:block}
     #lead-content h2{font-size:1.5em}
     #lead-content a{padding:10px 20px;border:3px solid #eee;}
     #lead-down{display:none}
+    .books-block h3,.books-block span,.books-block-2 h3,.books-block-2 span{float:none}
     .check-me-out-wrap{justify-content:center}
     .education-block h3,
     .education-block span{float:none}
