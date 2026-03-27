@@ -561,6 +561,376 @@ footer {
     height: auto;
 }
 
+.tool-shell {
+    padding: 40px 32px;
+    background: #fff;
+    border-radius: 8px;
+}
+
+.tool-page-body {
+    padding-left: 24px;
+    padding-right: 24px;
+}
+
+.tool-page-wrap {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+.tool-shell-copy {
+    text-align: center;
+}
+
+.tool-intro {
+    margin-bottom: 32px;
+}
+
+.tool-workspace {
+    display: flex;
+    align-items: flex-start;
+    gap: 28px;
+}
+
+.tool-workspace-main {
+    flex: 1 1 58%;
+    min-width: 0;
+}
+
+.tool-workspace-preview {
+    flex: 0 0 42%;
+    min-width: 340px;
+}
+
+.tool-form {
+    margin: 0;
+    padding: 28px;
+    border: 1px solid $border;
+    border-radius: 8px;
+    background: $background-alt;
+}
+
+.tool-label {
+    display: block;
+    margin-bottom: 10px;
+    color: $heading;
+    font-size: 1.05em;
+    font-weight: 700;
+}
+
+.tool-file-input {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    color: $text;
+}
+
+.tool-hint {
+    margin: 0 0 20px;
+    color: $text;
+    font-size: 0.95em;
+}
+
+.tool-submit {
+    color: $base-color;
+    border-color: $base-color;
+    background: #fff;
+
+    &:hover,
+    &:focus {
+        color: #fff;
+        background: $base-color;
+        border-color: $base-color;
+    }
+}
+
+.tool-status {
+    min-height: 24px;
+    margin: 18px auto 0;
+    text-align: center;
+    font-weight: 700;
+}
+
+.tool-status.is-success {
+    color: #2d7a46;
+}
+
+.tool-status.is-error {
+    color: #a13f3f;
+}
+
+.tool-results {
+    margin-top: 28px;
+}
+
+.tool-result-card {
+    height: 100%;
+    margin-bottom: 24px;
+    padding: 24px;
+    border: 1px solid $border;
+    border-radius: 8px;
+    background: #fff;
+
+    h3 {
+        margin-top: 0;
+        margin-bottom: 18px;
+        color: $heading;
+    }
+}
+
+.tool-label-card {
+    height: auto;
+}
+
+.tool-label-stage {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    border-radius: 8px;
+    background: linear-gradient(180deg, #f7f7f8, #eceef2);
+    overflow-x: auto;
+}
+
+.nutrition-label {
+    width: 100%;
+    max-width: 520px;
+    padding: 16px;
+    background: #fff;
+    color: #000;
+    border: 2px solid #000;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.nutrition-label-inner {
+    font-size: 16px;
+    line-height: 1.1;
+}
+
+.nutrition-label-title {
+    font-size: 58px;
+    line-height: 0.92;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+}
+
+.nutrition-label-rule {
+    width: 100%;
+    background: #000;
+}
+
+.nutrition-label-rule-thin {
+    height: 2px;
+    margin: 8px 0 10px;
+}
+
+.nutrition-label-rule-heavy {
+    height: 12px;
+    margin: 9px 0 8px;
+}
+
+.nutrition-label-serving-count {
+    font-size: 15px;
+    margin-bottom: 4px;
+}
+
+.nutrition-label-serving-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.nutrition-label-serving-label {
+    font-size: 20px;
+}
+
+.nutrition-label-serving-value {
+    text-align: right;
+}
+
+.nutrition-label-amount {
+    margin-bottom: 4px;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.nutrition-label-calories-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.nutrition-label-calories-label {
+    font-size: 38px;
+    line-height: 1;
+    font-weight: 900;
+}
+
+.nutrition-label-calories-value {
+    font-size: 68px;
+    line-height: 0.9;
+    font-weight: 900;
+}
+
+.nutrition-label-dv-header {
+    margin-bottom: 3px;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: right;
+}
+
+.nutrition-label-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 26px;
+    padding: 4px 0 3px;
+    border-top: 1px solid #000;
+    font-size: 17px;
+}
+
+.nutrition-label-row-bold {
+    font-weight: 700;
+}
+
+.nutrition-label-row-italic {
+    font-style: italic;
+}
+
+.nutrition-label-row-indent {
+    padding-left: 22px;
+}
+
+.nutrition-label-row-indent-deep {
+    padding-left: 42px;
+}
+
+.nutrition-label-row-protein {
+    border-bottom: 0;
+}
+
+.nutrition-label-dv {
+    flex-shrink: 0;
+    font-weight: 900;
+    text-align: right;
+}
+
+.nutrition-label-rule-vitamins {
+    margin-top: 0;
+}
+
+.nutrition-label-micronutrients .nutrition-label-row {
+    min-height: 28px;
+    font-size: 15px;
+}
+
+.nutrition-label-footnote {
+    padding-top: 8px;
+    font-size: 12px;
+    line-height: 1.25;
+}
+
+.tool-summary-list {
+    margin: 0;
+
+    div + div {
+        margin-top: 16px;
+    }
+
+    dt {
+        color: $text;
+        font-weight: 400;
+    }
+
+    dd {
+        margin-top: 4px;
+        margin-left: 0;
+        color: $heading;
+        font-size: 1.2em;
+        font-weight: 700;
+    }
+}
+
+.tool-json-output {
+    margin: 0;
+    padding: 18px;
+    border-radius: 6px;
+    background: #10233b;
+    color: #e7f0f8;
+    font-size: 0.95em;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.tool-table-card {
+    margin-bottom: 0;
+}
+
+.tool-letter-grid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.tool-letter-cell {
+    display: block;
+    padding: 14px 16px;
+    border-radius: 6px;
+    background: $background-alt;
+}
+
+.tool-letter-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.tool-letter-key {
+    color: $heading;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+}
+
+.tool-letter-pack-count {
+    color: $base-color-hover;
+    font-size: 0.95em;
+    font-weight: 700;
+}
+
+.tool-letter-metrics {
+    margin: 0;
+
+    div {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+    }
+
+    div + div {
+        margin-top: 6px;
+    }
+
+    dt {
+        color: $text;
+        font-weight: 400;
+    }
+
+    dd {
+        margin-left: 0;
+        color: $heading;
+        font-weight: 700;
+    }
+}
+
 /*
     --------------------------
     ----- 4. Lead Styles -----
@@ -1311,6 +1681,32 @@ footer {
         display: inline-block;
     }
 
+    .tool-shell {
+        padding: 32px 20px;
+    }
+
+    .tool-page-body {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .tool-workspace {
+        flex-direction: column;
+    }
+
+    .tool-workspace-preview {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .tool-form {
+        padding: 22px 18px;
+    }
+
+    .tool-letter-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
 }
 
 @media only screen and (max-width : 768px) {
@@ -1345,6 +1741,28 @@ footer {
             font-size: 0.9em;
             padding: 5px 10px;
         }
+    }
+
+    .tool-letter-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .nutrition-label {
+        min-width: 280px;
+        max-width: 100%;
+        padding: 10px;
+    }
+
+    .nutrition-label-title {
+        font-size: 36px;
+    }
+
+    .nutrition-label-calories-label {
+        font-size: 22px;
+    }
+
+    .nutrition-label-calories-value {
+        font-size: 38px;
     }
 
 }
