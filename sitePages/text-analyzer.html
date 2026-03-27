@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Text Analyzer | Drew Galbraith</title>
+    <link rel="icon" type="image/png" href="/favicons/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/svg+xml" href="/favicons/favicon.svg">
+    <link rel="shortcut icon" href="/favicons/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+    <link rel="manifest" href="/favicons/site.webmanifest">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
+    <link rel="stylesheet" href="../libs/font-awesome/css/font-awesome.min.css">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/styles.css" rel="stylesheet">
+</head>
+
+<body class="subpage">
+    <div id="mobile-menu-open" class="shadow-large">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+    </div>
+
+    <header>
+        <div id="mobile-menu-close">
+            <span>Close</span> <i class="fa fa-times" aria-hidden="true"></i>
+        </div>
+        <ul id="menu" class="shadow">
+            <li><a href="../index.html" class="no-scroll">Home</a></li>
+            <li><a href="about.html" class="no-scroll">About</a></li>
+            <li><a href="experience.html" class="no-scroll">Experience</a></li>
+            <li><a href="education.html" class="no-scroll">Education</a></li>
+            <li><a href="text-analyzer.html" class="active-page no-scroll">Tools</a></li>
+            <li><a href="contact.html" class="no-scroll">Contact</a></li>
+        </ul>
+    </header>
+
+    <section id="page-hero">
+        <div class="container">
+            <h1>Text Analyzer</h1>
+            <p>Upload a plain text file and compare its letter demand against one magnet-letter pack to estimate how many packs would be needed.</p>
+        </div>
+    </section>
+
+    <section class="page-body tool-page-body">
+        <div class="tool-page-wrap">
+            <div class="tool-shell shadow-large">
+                <div class="tool-shell-copy">
+                    <h2 class="heading">From Page to Plate 🥰</h2>
+                    <p class="section-intro tool-intro">Most of us think we can handle a saucy book or two, but how much reading can you <i>really</i> take?
+                         Upload a book below (try <a href="https://www.gutenberg.org/"> Project Gutenberg</a>, for starters) and see the stats if it were 
+                         written in Spaghettios. Dip into <i>The Count of Monte Crisco</i> or maybe <i>Pride and Prego-dice</i> (see more bad puns below). And a word of advice? Keep a bathroom available...</p>
+                </div>
+
+                <div class="tool-workspace">
+                    <div class="tool-workspace-main">
+                        <form id="text-analyzer-form" class="tool-form" novalidate>
+                            <label class="tool-label" for="text-file-input">Plain Text File</label>
+                            <input id="text-file-input" class="tool-file-input" type="file" accept=".txt,text/plain" required>
+                            <p class="tool-hint">Only `text/plain` files are accepted for now.</p>
+                            <button type="submit" class="btn-rounded-white tool-submit">Analyze File</button>
+                        </form>
+
+                        <div id="text-analyzer-status" class="tool-status" aria-live="polite"></div>
+
+                        <div id="text-analyzer-results" class="tool-results" hidden>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="tool-result-card">
+                                        <h3>File Summary</h3>
+                                        <dl class="tool-summary-list">
+                                            <div>
+                                                <dt>File name</dt>
+                                                <dd id="text-analyzer-file-name">-</dd>
+                                            </div>
+                                            <div>
+                                                <dt>Total characters</dt>
+                                                <dd id="text-analyzer-char-count">0</dd>
+                                            </div>
+                                            <div>
+                                                <dt>English letters</dt>
+                                                <dd id="text-analyzer-letter-total">0</dd>
+                                            </div>
+                                        </dl>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="tool-result-card">
+                                        <h3>Pack Summary</h3>
+                                        <dl class="tool-summary-list">
+                                            <div>
+                                                <dt>Packs needed</dt>
+                                                <dd id="text-analyzer-pack-count">0</dd>
+                                            </div>
+                                            <div>
+                                                <dt>Limiting letters</dt>
+                                                <dd id="text-analyzer-limiting-letters">-</dd>
+                                            </div>
+                                            <div>
+                                                <dt>Tightest ratio</dt>
+                                                <dd id="text-analyzer-limiting-ratio">0x</dd>
+                                            </div>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tool-result-card tool-table-card">
+                                <h3>Letter Count Object</h3>
+                                <pre id="text-analyzer-json" class="tool-json-output">{}</pre>
+                            </div>
+
+                            <!--
+                            <div class="tool-result-card tool-table-card">
+                                <h3>Letter Breakdown</h3>
+                                <div id="text-analyzer-grid" class="tool-letter-grid" aria-live="polite"></div>
+                            </div>
+                            -->
+                        </div>
+                    </div>
+
+                    <aside class="tool-workspace-preview">
+                        <div class="tool-result-card tool-label-card">
+                            <h3>Nutrition Label Preview</h3>
+                            <div class="tool-label-stage">
+                                <div id="nutrition-label-preview" class="nutrition-label" aria-label="Nutrition label preview"></div>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-5 copyright">
+                    <p>
+                        Copyright &copy; <span id="current-year">2026</span> Drew Galbraith
+                    </p>
+                </div>
+                <div class="col-sm-2 top">
+                    <span id="to-top">
+                        <i class="fa fa-chevron-up fa-3x" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <div class="col-sm-5 social">
+                    <ul>
+                        <li><a href="https://github.com/DrewGalbraith" target="_blank" rel="noopener noreferrer"><i class="fa fa-github fa-2x" aria-hidden="true"></i></a></li>
+                        <li><a href="https://www.linkedin.com/in/drew-galbraith-profile/" target="_blank" rel="noopener noreferrer"><i class="fa fa-linkedin fa-2x" aria-hidden="true"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../js/magnet-letter-data.js"></script>
+    <script src="../js/nutrition-label-data.js"></script>
+    <script src="../js/scripts.js"></script>
+</body>
+
+</html>
