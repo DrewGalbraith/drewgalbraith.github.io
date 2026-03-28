@@ -53,6 +53,9 @@ header.active{display:block}
 #page-hero{padding:150px 15px 70px;text-align:center;background:linear-gradient(135deg, rgba(33,125,187,0.95), rgba(52,152,219,0.82)),url(../images/oregon.jpeg) center/cover;color:#fff}
 #page-hero h1{margin:0 0 10px;font-size:4em;font-weight:900;text-transform:uppercase;letter-spacing:0.04em}
 #page-hero p{max-width:720px;margin:0 auto;font-size:1.2em;color:rgba(255,255,255,0.88)}
+.page-hero-title-wrap{display:inline-flex;align-items:center;justify-content:center;gap:26px;flex-wrap:nowrap}
+.page-hero-title-wrap h1{margin:0}
+.page-hero-portrait{width:250px;max-width:42vw;transform:rotate(-7deg)}
 .subpage{background:#f2f2f5}
 .section-intro{max-width:720px;margin:0 auto 20px;color:#74808a;font-size:1.1em}
 .lead-copy{max-width:700px;margin:0 auto 25px;color:rgba(255,255,255,0.88);font-size:1.1em}
@@ -313,6 +316,8 @@ header.active{display:block}
 .tool-letter-metrics dd{margin-left:0;color:#374054;font-weight:700}
 
 @media only screen and (max-width: 768px){
+    .page-hero-title-wrap{flex-direction:column;gap:14px}
+    .page-hero-portrait{width:210px;max-width:60vw}
     .tool-shell{padding:32px 20px}
     .tool-page-body{padding-left:15px;padding-right:15px}
     .tool-workspace{flex-direction:column}

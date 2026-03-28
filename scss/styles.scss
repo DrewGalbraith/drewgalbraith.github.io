@@ -376,6 +376,24 @@ footer {
     }
 }
 
+.page-hero-title-wrap {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 26px;
+    flex-wrap: nowrap;
+
+    h1 {
+        margin: 0;
+    }
+}
+
+.page-hero-portrait {
+    width: 250px;
+    max-width: 42vw;
+    transform: rotate(-7deg);
+}
+
 .subpage {
     background: $background-alt;
 }
@@ -446,6 +464,16 @@ footer {
 @media only screen and (max-width: 768px) {
     .check-me-out-wrap {
         justify-content: center;
+    }
+
+    .page-hero-title-wrap {
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .page-hero-portrait {
+        width: 210px;
+        max-width: 60vw;
     }
 }
 
