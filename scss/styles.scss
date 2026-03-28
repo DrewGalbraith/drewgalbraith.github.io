@@ -794,8 +794,39 @@ footer {
     }
 }
 
+.tool-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 18px;
+
+    h3 {
+        margin: 0;
+    }
+}
+
 .tool-label-card {
     height: auto;
+}
+
+.tool-export-button {
+    flex-shrink: 0;
+    padding: 8px 14px;
+    border: 1px solid $base-color;
+    border-radius: 999px;
+    color: $base-color;
+    background: #fff;
+    font-size: 0.9em;
+    font-weight: 700;
+    line-height: 1.2;
+
+    &:hover,
+    &:focus {
+        outline: none;
+        color: #fff;
+        background: $base-color;
+    }
 }
 
 .tool-label-stage {

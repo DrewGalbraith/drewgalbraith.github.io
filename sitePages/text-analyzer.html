@@ -130,7 +130,10 @@
 
                     <aside class="tool-workspace-preview">
                         <div class="tool-result-card tool-label-card">
-                            <h3>Nutrition Label Preview</h3>
+                            <div class="tool-card-header">
+                                <h3>Nutrition Label Preview</h3>
+                                <button id="download-label-pdf" class="tool-export-button" type="button">Download PDF</button>
+                            </div>
                             <div class="tool-label-stage">
                                 <div id="nutrition-label-preview" class="nutrition-label" aria-label="Nutrition label preview"></div>
                             </div>
@@ -169,6 +172,8 @@
         import * as pdfjsLib from 'https://cdn.jsdelivr.net/npm/pdfjs-dist@5.4.624/build/pdf.min.mjs';
         window.pdfjsLib = pdfjsLib;
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js"></script>
     <script src="../js/magnet-letter-data.js"></script>
     <script src="../js/nutrition-label-data.js"></script>
     <script src="../js/scripts.js"></script>

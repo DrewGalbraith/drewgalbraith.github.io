@@ -478,12 +478,40 @@
         });
     }
 
+    function exportNutritionLabelPdf(labelElement) {
+        var html2canvasLib = window.html2canvas;
+        var jsPdfNamespace = window.jspdf;
+        var JsPdfConstructor = jsPdfNamespace && jsPdfNamespace.jsPDF;
+
+        if (!labelElement || !html2canvasLib || !JsPdfConstructor) {
+            return Promise.reject(new Error('PDF export is unavailable.'));
+        }
+
+        return html2canvasLib(labelElement, {
+            backgroundColor: '#ffffff',
+            scale: 2
+        }).then(function(canvas) {
+            var imageData = canvas.toDataURL('image/png');
+            var pdfWidth = canvas.width * 0.75;
+            var pdfHeight = canvas.height * 0.75;
+            var pdfDocument = new JsPdfConstructor({
+                orientation: pdfWidth > pdfHeight ? 'landscape' : 'portrait',
+                unit: 'pt',
+                format: [pdfWidth, pdfHeight]
+            });
+
+            pdfDocument.addImage(imageData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+            pdfDocument.save('nutrition-label.pdf');
+        });
+    }
+
     function setupTextAnalyzer() {
         var form = document.getElementById('text-analyzer-form');
         var fileInput = document.getElementById('text-file-input');
         var clearFileButton = document.getElementById('text-analyzer-clear-file');
         var manualInput = document.getElementById('text-analyzer-manual-input');
         var clearInputButton = document.getElementById('text-analyzer-clear-input');
+        var downloadLabelButton = document.getElementById('download-label-pdf');
         var results = document.getElementById('text-analyzer-results');
         var fileName = document.getElementById('text-analyzer-file-name');
         var wordCount = document.getElementById('text-analyzer-word-count');
@@ -498,7 +526,7 @@
         var nutritionData = window.CANNED_FOOD_NUTRITION;
         var zeroNutritionData;
 
-        if (!form || !fileInput || !clearFileButton || !manualInput || !clearInputButton || !results || !fileName || !wordCount || !letterTotal || !packCount || !limitingLetters || !lettersWasted || !nutritionLabelPreview || !jsonOutput || !magnetPack || !magnetPack.counts || !nutritionData) {
+        if (!form || !fileInput || !clearFileButton || !manualInput || !clearInputButton || !downloadLabelButton || !results || !fileName || !wordCount || !letterTotal || !packCount || !limitingLetters || !lettersWasted || !nutritionLabelPreview || !jsonOutput || !magnetPack || !magnetPack.counts || !nutritionData) {
             return;
         }
 
@@ -542,6 +570,16 @@
             manualInput.value = '';
             resetAnalysis();
             manualInput.focus();
+        });
+
+        downloadLabelButton.addEventListener('click', function() {
+            setAnalyzerStatus('Preparing nutrition label PDF...', false);
+
+            exportNutritionLabelPdf(nutritionLabelPreview).then(function() {
+                setAnalyzerStatus('Nutrition label PDF downloaded.', false);
+            }).catch(function() {
+                setAnalyzerStatus('The nutrition label could not be exported right now.', true);
+            });
         });
 
         function renderAnalysis(textContent, sourceLabel) {
