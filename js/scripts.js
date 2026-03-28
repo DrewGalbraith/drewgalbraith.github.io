@@ -71,6 +71,7 @@
         '"The Taming of the Stew"',
         '"Antony and Cleopasta"',
         '"War and Peas"',
+        `"Al Dente's Inferno"`,
         '"Count Drac-stew-la"'
     ]);
 
