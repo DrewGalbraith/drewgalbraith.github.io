@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Text Analyzer | Drew Galbraith</title>
+    <title>George Orzowell | Drew Galbraith</title>
     <link rel="icon" type="image/png" href="/favicons/favicon-96x96.png" sizes="96x96">
     <link rel="icon" type="image/svg+xml" href="/favicons/favicon.svg">
     <link rel="shortcut icon" href="/favicons/favicon.ico">
@@ -31,7 +31,7 @@
             <li><a href="about.html" class="no-scroll">About</a></li>
             <li><a href="experience.html" class="no-scroll">Experience</a></li>
             <li><a href="education.html" class="no-scroll">Education</a></li>
-            <li><a href="text-analyzer.html" class="active-page no-scroll">Projects</a></li>
+            <li><a href="george-orzowell.html" class="active-page no-scroll">Projects</a></li>
             <li><a href="contact.html" class="no-scroll">Contact</a></li>
         </ul>
     </header>
@@ -42,7 +42,7 @@
                 <img class="page-hero-portrait" src="../images/george_orwell.png" alt="George Orwell rendered in Spaghettio form">
                 <h1>George Orzowell</h1>
             </div>
-            <h2 id="text-analyzer-subtitle" class="rotating-subtitle page-hero-subtitle">Spaghettio Planner</h2>
+            <h2 id="george-orzowell-subtitle" class="rotating-subtitle page-hero-subtitle">Spaghettio Planner</h2>
             <!-- <p>Upload a plain text file and compare its letter demand against one magnet-letter pack to estimate how many packs would be needed.</p> -->
         </div>
     </section>
@@ -58,24 +58,24 @@
 
                 <div class="tool-workspace">
                     <div class="tool-workspace-main">
-                        <form id="text-analyzer-form" class="tool-form" novalidate>
+                        <form id="george-orzowell-form" class="tool-form" novalidate>
                             <label class="tool-label" for="text-file-input">Upload File (.pdf, .txt)</label>
                             <div class="tool-file-row">
                                 <input id="text-file-input" class="tool-file-input" type="file" accept=".txt,text/plain,.pdf,application/pdf" required>
-                                <button id="text-analyzer-clear-file" class="tool-file-remove-button" type="button" aria-label="Remove uploaded file" hidden>x</button>
+                                <button id="george-orzowell-clear-file" class="tool-file-remove-button" type="button" aria-label="Remove uploaded file" hidden>x</button>
                             </div>
                             <div class="tool-label-row">
-                                <label class="tool-label" for="text-analyzer-manual-input">Or Paste Text</label>
-                                <button id="text-analyzer-clear-input" class="tool-clear-button" type="button">Clear</button>
+                                <label class="tool-label" for="george-orzowell-manual-input">Or Paste Text</label>
+                                <button id="george-orzowell-clear-input" class="tool-clear-button" type="button">Clear</button>
                             </div>
-                            <textarea id="text-analyzer-manual-input" class="tool-textarea" rows="8" placeholder="Paste text here"></textarea>
+                            <textarea id="george-orzowell-manual-input" class="tool-textarea" rows="8" placeholder="Paste text here"></textarea>
                             <p class="tool-hint">Paste text directly or upload a `.txt` or text-based `.pdf` file.</p>
                             <button type="submit" class="btn-rounded-white tool-submit">Analyze Text</button>
                         </form>
 
-                        <div id="text-analyzer-status" class="tool-status" aria-live="polite"></div>
+                        <div id="george-orzowell-status" class="tool-status" aria-live="polite"></div>
 
-                        <div id="text-analyzer-results" class="tool-results" hidden>
+                        <div id="george-orzowell-results" class="tool-results" hidden>
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="tool-result-card">
@@ -83,15 +83,15 @@
                                         <dl class="tool-summary-list">
                                             <div>
                                                 <dt>Source</dt>
-                                                <dd id="text-analyzer-file-name">-</dd>
+                                                <dd id="george-orzowell-file-name">-</dd>
                                             </div>
                                             <div>
                                                 <dt>Word count</dt>
-                                                <dd id="text-analyzer-word-count">0</dd>
+                                                <dd id="george-orzowell-word-count">0</dd>
                                             </div>
                                             <div>
                                                 <dt>English letters</dt>
-                                                <dd id="text-analyzer-letter-total">0</dd>
+                                                <dd id="george-orzowell-letter-total">0</dd>
                                             </div>
                                         </dl>
                                     </div>
@@ -102,15 +102,15 @@
                                         <dl class="tool-summary-list">
                                             <div>
                                                 <dt>Packs needed</dt>
-                                                <dd id="text-analyzer-pack-count">0</dd>
+                                                <dd id="george-orzowell-pack-count">0</dd>
                                             </div>
                                             <div>
                                                 <dt>Limiting letters</dt>
-                                                <dd id="text-analyzer-limiting-letters">-</dd>
+                                                <dd id="george-orzowell-limiting-letters">-</dd>
                                             </div>
                                             <div>
                                                 <dt>Letters wasted</dt>
-                                                <dd id="text-analyzer-letters-wasted">~0 (0%)</dd>
+                                                <dd id="george-orzowell-letters-wasted">~0 (0%)</dd>
                                             </div>
                                         </dl>
                                     </div>
@@ -119,13 +119,13 @@
 
                             <div class="tool-result-card tool-table-card">
                                 <h3>Letter Count Object</h3>
-                                <pre id="text-analyzer-json" class="tool-json-output">{}</pre>
+                                <pre id="george-orzowell-json" class="tool-json-output">{}</pre>
                             </div>
 
                             <!--
                             <div class="tool-result-card tool-table-card">
                                 <h3>Letter Breakdown</h3>
-                                <div id="text-analyzer-grid" class="tool-letter-grid" aria-live="polite"></div>
+                                <div id="george-orzowell-grid" class="tool-letter-grid" aria-live="polite"></div>
                             </div>
                             -->
                         </div>

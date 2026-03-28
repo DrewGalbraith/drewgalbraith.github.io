@@ -60,7 +60,7 @@
         'Board Game Lover'
     ]);
 
-    setupRotatingSubtitle('#text-analyzer-subtitle', [
+    setupRotatingSubtitle('#george-orzowell-subtitle', [
         '"The Count of Monte Crisco"',
         '"Pride and Prego-dice"',
         '"A Tale of Two Zitis"',
@@ -424,7 +424,7 @@
     }
 
     function setAnalyzerStatus(message, isError) {
-        var statusElement = document.getElementById('text-analyzer-status');
+        var statusElement = document.getElementById('george-orzowell-status');
 
         if (!statusElement) {
             return;
@@ -507,22 +507,22 @@
     }
 
     function setupTextAnalyzer() {
-        var form = document.getElementById('text-analyzer-form');
+        var form = document.getElementById('george-orzowell-form');
         var fileInput = document.getElementById('text-file-input');
-        var clearFileButton = document.getElementById('text-analyzer-clear-file');
-        var manualInput = document.getElementById('text-analyzer-manual-input');
-        var clearInputButton = document.getElementById('text-analyzer-clear-input');
+        var clearFileButton = document.getElementById('george-orzowell-clear-file');
+        var manualInput = document.getElementById('george-orzowell-manual-input');
+        var clearInputButton = document.getElementById('george-orzowell-clear-input');
         var downloadLabelButton = document.getElementById('download-label-pdf');
-        var results = document.getElementById('text-analyzer-results');
-        var fileName = document.getElementById('text-analyzer-file-name');
-        var wordCount = document.getElementById('text-analyzer-word-count');
-        var letterTotal = document.getElementById('text-analyzer-letter-total');
-        var packCount = document.getElementById('text-analyzer-pack-count');
-        var limitingLetters = document.getElementById('text-analyzer-limiting-letters');
-        var lettersWasted = document.getElementById('text-analyzer-letters-wasted');
+        var results = document.getElementById('george-orzowell-results');
+        var fileName = document.getElementById('george-orzowell-file-name');
+        var wordCount = document.getElementById('george-orzowell-word-count');
+        var letterTotal = document.getElementById('george-orzowell-letter-total');
+        var packCount = document.getElementById('george-orzowell-pack-count');
+        var limitingLetters = document.getElementById('george-orzowell-limiting-letters');
+        var lettersWasted = document.getElementById('george-orzowell-letters-wasted');
         var nutritionLabelPreview = document.getElementById('nutrition-label-preview');
-        var jsonOutput = document.getElementById('text-analyzer-json');
-        var letterGrid = document.getElementById('text-analyzer-grid');
+        var jsonOutput = document.getElementById('george-orzowell-json');
+        var letterGrid = document.getElementById('george-orzowell-grid');
         var magnetPack = window.MAGNET_LETTER_PACK;
         var nutritionData = window.CANNED_FOOD_NUTRITION;
         var zeroNutritionData;
