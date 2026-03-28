@@ -394,7 +394,7 @@ footer {
     font-size: 1.1em;
 }
 
-#hero-subtitle {
+.rotating-subtitle {
     display: block;
     min-height: 1.3em;
     transition: opacity 0.25s ease, transform 0.25s ease;
@@ -408,6 +408,18 @@ footer {
         opacity: 0;
         transform: translateY(12px);
     }
+}
+
+#hero-subtitle {
+    margin: 0;
+}
+
+.page-hero-subtitle {
+    margin: 14px 0 0;
+    color: rgba(255, 255, 255, 0.88);
+    font-size: 1.45em;
+    font-weight: 300;
+    letter-spacing: 0.02em;
 }
 
 .page-grid {
@@ -618,11 +630,115 @@ footer {
     font-weight: 700;
 }
 
+.tool-label-row {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 14px;
+}
+
+.tool-clear-button {
+    flex-shrink: 0;
+    padding: 6px 12px;
+    border: 1px solid $border;
+    border-radius: 999px;
+    color: $heading;
+    background: transparent;
+    font-size: 0.85em;
+    font-weight: 700;
+    line-height: 1;
+
+    &:hover,
+    &:focus {
+        outline: none;
+        border-color: $base-color;
+        color: $base-color;
+        background: rgba(52, 152, 219, 0.08);
+    }
+}
+
+.tool-file-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
 .tool-file-input {
     display: block;
     width: 100%;
-    margin-bottom: 10px;
-    color: $text;
+    padding: 8px 12px;
+    border: 1px solid #8e98a4;
+    border-radius: 6px;
+    color: #fff;
+    background: #7f8894;
+
+    &::file-selector-button {
+        margin-right: 12px;
+        padding: 8px 14px;
+        border: 1px solid $border;
+        border-radius: 6px;
+        color: $heading;
+        background: #fff;
+        font-weight: 700;
+    }
+
+    &::-webkit-file-upload-button {
+        margin-right: 12px;
+        padding: 8px 14px;
+        border: 1px solid $border;
+        border-radius: 6px;
+        color: $heading;
+        background: #fff;
+        font-weight: 700;
+    }
+
+    &:focus {
+        outline: none;
+        border-color: $base-color;
+        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.12);
+    }
+}
+
+.tool-textarea {
+    display: block;
+    width: 100%;
+    min-height: 180px;
+    margin: 0 0 10px;
+    padding: 12px 14px;
+    border: 1px solid $border;
+    border-radius: 6px;
+    color: $heading;
+    background: #fff;
+    resize: vertical;
+
+    &:focus {
+        outline: none;
+        border-color: $base-color;
+        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.12);
+    }
+}
+
+.tool-file-remove-button {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    border: 1px solid $border;
+    border-radius: 999px;
+    color: $heading;
+    background: #fff;
+    font-size: 0.95em;
+    font-weight: 700;
+    line-height: 1;
+
+    &:hover,
+    &:focus {
+        outline: none;
+        border-color: $base-color;
+        color: $base-color;
+        background: rgba(52, 152, 219, 0.08);
+    }
 }
 
 .tool-hint {

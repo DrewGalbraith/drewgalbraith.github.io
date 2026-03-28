@@ -18,39 +18,61 @@
     // Remove no-js class
     $('html').removeClass('no-js');
 
-    // Rotate hero subtitles on the homepage with a short slide/fade transition.
-    var heroSubtitles = [
+    function setupRotatingSubtitle(selector, options) {
+        var $subtitle = $(selector);
+        var subtitles = options || [];
+        var subtitleIndex;
+
+        if (!$subtitle.length || !subtitles.length) {
+            return;
+        }
+
+        subtitleIndex = Math.floor(Math.random() * subtitles.length);
+        $subtitle.text(subtitles[subtitleIndex]);
+
+        if (subtitles.length > 1) {
+            window.setInterval(function() {
+                $subtitle.addClass('is-transitioning-out');
+
+                window.setTimeout(function() {
+                    subtitleIndex = (subtitleIndex + 1) % subtitles.length;
+                    $subtitle
+                        .removeClass('is-transitioning-out')
+                        .addClass('is-transitioning-in')
+                        .text(subtitles[subtitleIndex]);
+
+                    window.requestAnimationFrame(function() {
+                        $subtitle.removeClass('is-transitioning-in');
+                    });
+                }, 250);
+            }, 4000);
+        }
+    }
+
+    // Rotate hero subtitles with a short slide/fade transition.
+    setupRotatingSubtitle('#hero-subtitle', [
         'Gradschool dropout',
         'Web Developer',
         'LLM Researcher',
         'Linguist',
         'Privacy Zealot',
         'Budding Sci-Fi Fan',
-        'Board Game Lover',
-    ];
-    var $heroSubtitle = $('#hero-subtitle');
-    if ($heroSubtitle.length) {
-        var subtitleIndex = Math.floor(Math.random() * heroSubtitles.length);
-        $heroSubtitle.text(heroSubtitles[subtitleIndex]);
+        'Board Game Lover'
+    ]);
 
-        if (heroSubtitles.length > 1) {
-            window.setInterval(function() {
-                $heroSubtitle.addClass('is-transitioning-out');
-
-                window.setTimeout(function() {
-                    subtitleIndex = (subtitleIndex + 1) % heroSubtitles.length;
-                    $heroSubtitle
-                        .removeClass('is-transitioning-out')
-                        .addClass('is-transitioning-in')
-                        .text(heroSubtitles[subtitleIndex]);
-
-                    window.requestAnimationFrame(function() {
-                        $heroSubtitle.removeClass('is-transitioning-in');
-                    });
-                }, 250);
-            }, 4000);
-        }
-    }
+    setupRotatingSubtitle('#text-analyzer-subtitle', [
+        '"The Count of Monte Crisco"',
+        '"Pride and Prego-dice"',
+        '"A Tale of Two Zitis"',
+        '"Charlie and the Chili Factory"',
+        '"The Handmaid’s Taleggio"',
+        '"Fifty Shades of Gravy"',
+        '"Jurrasic Pork"',
+        '"The Taming of the Stew"',
+        '"Antony and Cleopasta"',
+        '"War and Peas"',
+        '"Count Drac-stew-la"'
+    ]);
 
     // Animate to section when nav is clicked
     $('header a').click(function(e) {
@@ -176,15 +198,30 @@
         }, 0);
     }
 
+    function countWords(textContent) {
+        var trimmedText = String(textContent || '').trim();
+
+        if (!trimmedText) {
+            return 0;
+        }
+
+        return trimmedText.split(/\s+/).length;
+    }
+
     function analyzePackRequirements(letterCounts, packCounts) {
         var maxRatio = 0;
         var breakdown = [];
+        var totalLettersNeeded = 0;
+        var lettersPerPack = 0;
 
         Object.keys(packCounts).forEach(function(letter) {
             var needed = letterCounts[letter] || 0;
             var perPack = packCounts[letter];
             var rawRatio = perPack > 0 ? needed / perPack : 0;
             var packsForLetter = needed > 0 ? Math.ceil(rawRatio) : 0;
+
+            totalLettersNeeded += needed;
+            lettersPerPack += perPack;
 
             if (rawRatio > maxRatio) {
                 maxRatio = rawRatio;
@@ -199,14 +236,29 @@
             });
         });
 
+        var packsNeeded = Math.ceil(maxRatio);
+        var totalLettersPurchased = packsNeeded * lettersPerPack;
+        var wastedLetters = Math.max(0, totalLettersPurchased - totalLettersNeeded);
+        var wastePercentage = totalLettersPurchased > 0 ? (wastedLetters / totalLettersPurchased) * 100 : 0;
+
         return {
-            packsNeeded: Math.ceil(maxRatio),
+            packsNeeded: packsNeeded,
             maxRatio: maxRatio,
             limitingLetters: breakdown.filter(function(item) {
                 return item.needed > 0 && item.rawRatio === maxRatio;
             }),
-            breakdown: breakdown
+            breakdown: breakdown,
+            wastedLetters: wastedLetters,
+            wastePercentage: wastePercentage
         };
+    }
+
+    function formatApproximateNumber(value) {
+        if (value <= 0) {
+            return '~0';
+        }
+
+        return '~' + (Math.round(value / 10) * 10).toLocaleString();
     }
 
     function escapeHtml(value) {
@@ -381,16 +433,64 @@
         statusElement.textContent = message;
     }
 
+    function isPlainTextFile(file) {
+        var lowerName = file && file.name ? file.name.toLowerCase() : '';
+        return !!file && (file.type === 'text/plain' || /\.txt$/i.test(lowerName));
+    }
+
+    function isPdfFile(file) {
+        var lowerName = file && file.name ? file.name.toLowerCase() : '';
+        return !!file && (file.type === 'application/pdf' || /\.pdf$/i.test(lowerName));
+    }
+
+    function extractPdfText(file) {
+        var pdfjs = window.pdfjsLib;
+
+        if (!pdfjs) {
+            return Promise.reject(new Error('PDF support is unavailable.'));
+        }
+
+        pdfjs.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@5.4.624/build/pdf.worker.min.mjs';
+
+        return file.arrayBuffer().then(function(buffer) {
+            var loadingTask = pdfjs.getDocument({ data: buffer });
+
+            return loadingTask.promise.then(function(pdfDocument) {
+                var pagePromises = [];
+                var pageNumber;
+
+                for (pageNumber = 1; pageNumber <= pdfDocument.numPages; pageNumber += 1) {
+                    pagePromises.push(
+                        pdfDocument.getPage(pageNumber).then(function(page) {
+                            return page.getTextContent().then(function(textContent) {
+                                return textContent.items.map(function(item) {
+                                    return item.str;
+                                }).join(' ');
+                            });
+                        })
+                    );
+                }
+
+                return Promise.all(pagePromises).then(function(pageTexts) {
+                    return pageTexts.join('\n');
+                });
+            });
+        });
+    }
+
     function setupTextAnalyzer() {
         var form = document.getElementById('text-analyzer-form');
         var fileInput = document.getElementById('text-file-input');
+        var clearFileButton = document.getElementById('text-analyzer-clear-file');
+        var manualInput = document.getElementById('text-analyzer-manual-input');
+        var clearInputButton = document.getElementById('text-analyzer-clear-input');
         var results = document.getElementById('text-analyzer-results');
         var fileName = document.getElementById('text-analyzer-file-name');
-        var charCount = document.getElementById('text-analyzer-char-count');
+        var wordCount = document.getElementById('text-analyzer-word-count');
         var letterTotal = document.getElementById('text-analyzer-letter-total');
         var packCount = document.getElementById('text-analyzer-pack-count');
         var limitingLetters = document.getElementById('text-analyzer-limiting-letters');
-        var limitingRatio = document.getElementById('text-analyzer-limiting-ratio');
+        var lettersWasted = document.getElementById('text-analyzer-letters-wasted');
         var nutritionLabelPreview = document.getElementById('nutrition-label-preview');
         var jsonOutput = document.getElementById('text-analyzer-json');
         var letterGrid = document.getElementById('text-analyzer-grid');
@@ -398,52 +498,119 @@
         var nutritionData = window.CANNED_FOOD_NUTRITION;
         var zeroNutritionData;
 
-        if (!form || !fileInput || !results || !fileName || !charCount || !letterTotal || !packCount || !limitingLetters || !limitingRatio || !nutritionLabelPreview || !jsonOutput || !magnetPack || !magnetPack.counts || !nutritionData) {
+        if (!form || !fileInput || !clearFileButton || !manualInput || !clearInputButton || !results || !fileName || !wordCount || !letterTotal || !packCount || !limitingLetters || !lettersWasted || !nutritionLabelPreview || !jsonOutput || !magnetPack || !magnetPack.counts || !nutritionData) {
             return;
         }
 
         zeroNutritionData = buildDisplayNutritionData(nutritionData, 0);
         nutritionLabelPreview.innerHTML = renderNutritionLabel(zeroNutritionData);
 
+        function resetAnalysis() {
+            fileName.textContent = '-';
+            wordCount.textContent = '0';
+            letterTotal.textContent = '0';
+            packCount.textContent = '0';
+            limitingLetters.textContent = '-';
+            lettersWasted.textContent = '~0 (0%)';
+            nutritionLabelPreview.innerHTML = renderNutritionLabel(zeroNutritionData);
+            jsonOutput.textContent = '{}';
+            if (letterGrid) {
+                letterGrid.innerHTML = '';
+            }
+            results.hidden = true;
+            setAnalyzerStatus('', false);
+        }
+
+        function syncFileClearButton() {
+            clearFileButton.hidden = !(fileInput.files && fileInput.files.length);
+        }
+
+        syncFileClearButton();
+
+        fileInput.addEventListener('change', function() {
+            syncFileClearButton();
+        });
+
+        clearFileButton.addEventListener('click', function() {
+            fileInput.value = '';
+            syncFileClearButton();
+            resetAnalysis();
+            fileInput.focus();
+        });
+
+        clearInputButton.addEventListener('click', function() {
+            manualInput.value = '';
+            resetAnalysis();
+            manualInput.focus();
+        });
+
+        function renderAnalysis(textContent, sourceLabel) {
+            var letterCounts = countEnglishLetters(textContent);
+            var packAnalysis = analyzePackRequirements(letterCounts, magnetPack.counts);
+            var scaledNutritionData = buildDisplayNutritionData(nutritionData, packAnalysis.packsNeeded);
+
+            fileName.textContent = sourceLabel;
+            wordCount.textContent = countWords(textContent).toLocaleString();
+            letterTotal.textContent = sumLetterCounts(letterCounts).toLocaleString();
+            packCount.textContent = packAnalysis.packsNeeded.toLocaleString();
+            limitingLetters.textContent = packAnalysis.limitingLetters.length ? packAnalysis.limitingLetters.map(function(item) {
+                return item.letter.toUpperCase();
+            }).join(', ') : 'None';
+            lettersWasted.textContent = formatApproximateNumber(packAnalysis.wastedLetters) + ' (' + Math.round(packAnalysis.wastePercentage) + '%)';
+            nutritionLabelPreview.innerHTML = renderNutritionLabel(scaledNutritionData);
+            jsonOutput.textContent = JSON.stringify(letterCounts, null, 2);
+            if (letterGrid) {
+                letterGrid.innerHTML = renderLetterGrid(packAnalysis);
+            }
+            results.hidden = false;
+
+            setAnalyzerStatus('Analysis complete! See stats below.', false);
+        }
+
         form.addEventListener('submit', function(event) {
             var selectedFile = fileInput.files && fileInput.files[0];
+            var manualText = manualInput.value;
+            var hasManualText = manualText.trim().length > 0;
 
             event.preventDefault();
             results.hidden = true;
 
-            if (!selectedFile) {
-                setAnalyzerStatus('Select a text file before running the analysis.', true);
+            if (!selectedFile && !hasManualText) {
+                setAnalyzerStatus('Paste text or upload a file before analyzing!', true);
                 return;
             }
 
-            if (selectedFile.type !== 'text/plain') {
-                setAnalyzerStatus('This prototype only accepts files with the MIME type text/plain.', true);
+            if (hasManualText) {
+                setAnalyzerStatus('Analyzing pasted text in your browser...', false);
+                renderAnalysis(manualText, 'Pasted text');
+                return;
+            }
+
+            if (!isPlainTextFile(selectedFile) && !isPdfFile(selectedFile)) {
+                setAnalyzerStatus('This tool currently accepts only `.txt` and text-based `.pdf` files.', true);
+                return;
+            }
+
+            if (isPdfFile(selectedFile)) {
+                setAnalyzerStatus('Extracting text from PDF in your browser...', false);
+
+                extractPdfText(selectedFile).then(function(textContent) {
+                    if (!textContent.trim()) {
+                        setAnalyzerStatus('This PDF does not appear to contain extractable text. If it is scanned, try OCR first.', true);
+                        return;
+                    }
+
+                    renderAnalysis(textContent, selectedFile.name);
+                }).catch(function() {
+                    setAnalyzerStatus('The PDF could not be read. Please try another PDF or upload a plain text file.', true);
+                });
                 return;
             }
 
             setAnalyzerStatus('Analyzing file in your browser...', false);
 
             selectedFile.text().then(function(textContent) {
-                var letterCounts = countEnglishLetters(textContent);
-                var packAnalysis = analyzePackRequirements(letterCounts, magnetPack.counts);
-                var scaledNutritionData = buildDisplayNutritionData(nutritionData, packAnalysis.packsNeeded);
-
-                fileName.textContent = selectedFile.name;
-                charCount.textContent = textContent.length.toLocaleString();
-                letterTotal.textContent = sumLetterCounts(letterCounts).toLocaleString();
-                packCount.textContent = packAnalysis.packsNeeded.toLocaleString();
-                limitingLetters.textContent = packAnalysis.limitingLetters.length ? packAnalysis.limitingLetters.map(function(item) {
-                    return item.letter.toUpperCase();
-                }).join(', ') : 'None';
-                limitingRatio.textContent = packAnalysis.maxRatio.toFixed(2) + 'x';
-                nutritionLabelPreview.innerHTML = renderNutritionLabel(scaledNutritionData);
-                jsonOutput.textContent = JSON.stringify(letterCounts, null, 2);
-                if (letterGrid) {
-                    letterGrid.innerHTML = renderLetterGrid(packAnalysis);
-                }
-                results.hidden = false;
-
-                setAnalyzerStatus('Analysis complete. The counts, pack estimate, and nutrition totals were generated entirely in your browser.', false);
+                renderAnalysis(textContent, selectedFile.name);
             }).catch(function() {
                 setAnalyzerStatus('The file could not be read. Please try another text file.', true);
             });

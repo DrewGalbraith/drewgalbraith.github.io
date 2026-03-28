@@ -31,7 +31,7 @@
             <li><a href="about.html" class="no-scroll">About</a></li>
             <li><a href="experience.html" class="no-scroll">Experience</a></li>
             <li><a href="education.html" class="no-scroll">Education</a></li>
-            <li><a href="text-analyzer.html" class="active-page no-scroll">Tools</a></li>
+            <li><a href="text-analyzer.html" class="active-page no-scroll">Projects</a></li>
             <li><a href="contact.html" class="no-scroll">Contact</a></li>
         </ul>
     </header>
@@ -39,7 +39,8 @@
     <section id="page-hero">
         <div class="container">
             <h1>Text Analyzer</h1>
-            <p>Upload a plain text file and compare its letter demand against one magnet-letter pack to estimate how many packs would be needed.</p>
+            <h2 id="text-analyzer-subtitle" class="rotating-subtitle page-hero-subtitle">Magnet pack economics</h2>
+            <!-- <p>Upload a plain text file and compare its letter demand against one magnet-letter pack to estimate how many packs would be needed.</p> -->
         </div>
     </section>
 
@@ -47,19 +48,26 @@
         <div class="tool-page-wrap">
             <div class="tool-shell shadow-large">
                 <div class="tool-shell-copy">
-                    <h2 class="heading">From Page to Plate 🥰</h2>
-                    <p class="section-intro tool-intro">Most of us think we can handle a saucy book or two, but how much reading can you <i>really</i> take?
-                         Upload a book below (try <a href="https://www.gutenberg.org/"> Project Gutenberg</a>, for starters) and see the stats if it were 
-                         written in Spaghettios. Dip into <i>The Count of Monte Crisco</i> or maybe <i>Pride and Prego-dice</i> (see more bad puns below). And a word of advice? Keep a bathroom available...</p>
+                    <p class="section-intro tool-intro">Most of us think we can handle a saucy book, can we <i>really</i> take?
+                         Upload a book below (e.g. <a href="https://www.gutenberg.org/"> Project Gutenberg</a>) or paste some text and see the stats if it were 
+                         written in Spaghettios.</p>
                 </div>
 
                 <div class="tool-workspace">
                     <div class="tool-workspace-main">
                         <form id="text-analyzer-form" class="tool-form" novalidate>
-                            <label class="tool-label" for="text-file-input">Plain Text File</label>
-                            <input id="text-file-input" class="tool-file-input" type="file" accept=".txt,text/plain" required>
-                            <p class="tool-hint">Only `text/plain` files are accepted for now.</p>
-                            <button type="submit" class="btn-rounded-white tool-submit">Analyze File</button>
+                            <label class="tool-label" for="text-file-input">Upload File (.pdf, .txt)</label>
+                            <div class="tool-file-row">
+                                <input id="text-file-input" class="tool-file-input" type="file" accept=".txt,text/plain,.pdf,application/pdf" required>
+                                <button id="text-analyzer-clear-file" class="tool-file-remove-button" type="button" aria-label="Remove uploaded file" hidden>x</button>
+                            </div>
+                            <div class="tool-label-row">
+                                <label class="tool-label" for="text-analyzer-manual-input">Or Paste Text</label>
+                                <button id="text-analyzer-clear-input" class="tool-clear-button" type="button">Clear</button>
+                            </div>
+                            <textarea id="text-analyzer-manual-input" class="tool-textarea" rows="8" placeholder="Paste text here"></textarea>
+                            <p class="tool-hint">Paste text directly or upload a `.txt` or text-based `.pdf` file.</p>
+                            <button type="submit" class="btn-rounded-white tool-submit">Analyze Text</button>
                         </form>
 
                         <div id="text-analyzer-status" class="tool-status" aria-live="polite"></div>
@@ -71,12 +79,12 @@
                                         <h3>File Summary</h3>
                                         <dl class="tool-summary-list">
                                             <div>
-                                                <dt>File name</dt>
+                                                <dt>Source</dt>
                                                 <dd id="text-analyzer-file-name">-</dd>
                                             </div>
                                             <div>
-                                                <dt>Total characters</dt>
-                                                <dd id="text-analyzer-char-count">0</dd>
+                                                <dt>Word count</dt>
+                                                <dd id="text-analyzer-word-count">0</dd>
                                             </div>
                                             <div>
                                                 <dt>English letters</dt>
@@ -98,8 +106,8 @@
                                                 <dd id="text-analyzer-limiting-letters">-</dd>
                                             </div>
                                             <div>
-                                                <dt>Tightest ratio</dt>
-                                                <dd id="text-analyzer-limiting-ratio">0x</dd>
+                                                <dt>Letters wasted</dt>
+                                                <dd id="text-analyzer-letters-wasted">~0 (0%)</dd>
                                             </div>
                                         </dl>
                                     </div>
@@ -157,6 +165,10 @@
     </footer>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="module">
+        import * as pdfjsLib from 'https://cdn.jsdelivr.net/npm/pdfjs-dist@5.4.624/build/pdf.min.mjs';
+        window.pdfjsLib = pdfjsLib;
+    </script>
     <script src="../js/magnet-letter-data.js"></script>
     <script src="../js/nutrition-label-data.js"></script>
     <script src="../js/scripts.js"></script>
