@@ -1,0 +1,657 @@
+{
+  "1880": {
+    "talks": 17,
+    "speakers": 14,
+    "source": "ocr"
+  },
+  "1897": {
+    "talks": 25,
+    "speakers": 21,
+    "source": "ocr"
+  },
+  "1898": {
+    "talks": 18,
+    "speakers": 17,
+    "source": "ocr"
+  },
+  "1899": {
+    "talks": 24,
+    "speakers": 18,
+    "source": "ocr"
+  },
+  "1900": {
+    "talks": 29,
+    "speakers": 20,
+    "source": "ocr"
+  },
+  "1901": {
+    "talks": 40,
+    "speakers": 23,
+    "source": "ocr"
+  },
+  "1902": {
+    "talks": 46,
+    "speakers": 40,
+    "source": "ocr"
+  },
+  "1903": {
+    "talks": 30,
+    "speakers": 24,
+    "source": "ocr"
+  },
+  "1904": {
+    "talks": 31,
+    "speakers": 27,
+    "source": "ocr"
+  },
+  "1905": {
+    "talks": 35,
+    "speakers": 32,
+    "source": "ocr"
+  },
+  "1906": {
+    "talks": 32,
+    "speakers": 29,
+    "source": "ocr"
+  },
+  "1907": {
+    "talks": 31,
+    "speakers": 30,
+    "source": "ocr"
+  },
+  "1908": {
+    "talks": 33,
+    "speakers": 26,
+    "source": "ocr"
+  },
+  "1909": {
+    "talks": 32,
+    "speakers": 28,
+    "source": "ocr"
+  },
+  "1910": {
+    "talks": 31,
+    "speakers": 30,
+    "source": "ocr"
+  },
+  "1911": {
+    "talks": 35,
+    "speakers": 31,
+    "source": "ocr"
+  },
+  "1912": {
+    "talks": 35,
+    "speakers": 32,
+    "source": "ocr"
+  },
+  "1913": {
+    "talks": 41,
+    "speakers": 37,
+    "source": "ocr"
+  },
+  "1914": {
+    "talks": 31,
+    "speakers": 28,
+    "source": "ocr"
+  },
+  "1915": {
+    "talks": 57,
+    "speakers": 54,
+    "source": "ocr"
+  },
+  "1916": {
+    "talks": 37,
+    "speakers": 34,
+    "source": "ocr"
+  },
+  "1917": {
+    "talks": 41,
+    "speakers": 36,
+    "source": "ocr"
+  },
+  "1918": {
+    "talks": 46,
+    "speakers": 39,
+    "source": "ocr"
+  },
+  "1919": {
+    "talks": 44,
+    "speakers": 33,
+    "source": "ocr"
+  },
+  "1920": {
+    "talks": 46,
+    "speakers": 40,
+    "source": "ocr"
+  },
+  "1921": {
+    "talks": 64,
+    "speakers": 48,
+    "source": "ocr"
+  },
+  "1922": {
+    "talks": 40,
+    "speakers": 36,
+    "source": "ocr"
+  },
+  "1923": {
+    "talks": 48,
+    "speakers": 46,
+    "source": "ocr"
+  },
+  "1924": {
+    "talks": 48,
+    "speakers": 43,
+    "source": "ocr"
+  },
+  "1925": {
+    "talks": 46,
+    "speakers": 42,
+    "source": "ocr"
+  },
+  "1926": {
+    "talks": 40,
+    "speakers": 36,
+    "source": "ocr"
+  },
+  "1927": {
+    "talks": 47,
+    "speakers": 45,
+    "source": "ocr"
+  },
+  "1928": {
+    "talks": 34,
+    "speakers": 32,
+    "source": "ocr"
+  },
+  "1929": {
+    "talks": 40,
+    "speakers": 38,
+    "source": "ocr"
+  },
+  "1930": {
+    "talks": 44,
+    "speakers": 39,
+    "source": "ocr"
+  },
+  "1931": {
+    "talks": 38,
+    "speakers": 36,
+    "source": "ocr"
+  },
+  "1932": {
+    "talks": 28,
+    "speakers": 25,
+    "source": "ocr"
+  },
+  "1933": {
+    "talks": 37,
+    "speakers": 31,
+    "source": "ocr"
+  },
+  "1934": {
+    "talks": 39,
+    "speakers": 34,
+    "source": "ocr"
+  },
+  "1935": {
+    "talks": 34,
+    "speakers": 31,
+    "source": "ocr"
+  },
+  "1936": {
+    "talks": 40,
+    "speakers": 37,
+    "source": "ocr"
+  },
+  "1937": {
+    "talks": 31,
+    "speakers": 29,
+    "source": "ocr"
+  },
+  "1938": {
+    "talks": 41,
+    "speakers": 39,
+    "source": "ocr"
+  },
+  "1939": {
+    "talks": 31,
+    "speakers": 28,
+    "source": "ocr"
+  },
+  "1940": {
+    "talks": 28,
+    "speakers": 27,
+    "source": "ocr"
+  },
+  "1941": {
+    "talks": 39,
+    "speakers": 35,
+    "source": "ocr"
+  },
+  "1942": {
+    "talks": 27,
+    "speakers": 27,
+    "source": "ocr"
+  },
+  "1943": {
+    "talks": 30,
+    "speakers": 30,
+    "source": "ocr"
+  },
+  "1944": {
+    "talks": 28,
+    "speakers": 28,
+    "source": "ocr"
+  },
+  "1945": {
+    "talks": 34,
+    "speakers": 29,
+    "source": "ocr"
+  },
+  "1946": {
+    "talks": 30,
+    "speakers": 27,
+    "source": "ocr"
+  },
+  "1947": {
+    "talks": 30,
+    "speakers": 29,
+    "source": "ocr"
+  },
+  "1948": {
+    "talks": 32,
+    "speakers": 29,
+    "source": "ocr"
+  },
+  "1949": {
+    "talks": 34,
+    "speakers": 29,
+    "source": "ocr"
+  },
+  "1950": {
+    "talks": 32,
+    "speakers": 28,
+    "source": "ocr"
+  },
+  "1951": {
+    "talks": 32,
+    "speakers": 31,
+    "source": "ocr"
+  },
+  "1952": {
+    "talks": 36,
+    "speakers": 33,
+    "source": "ocr"
+  },
+  "1953": {
+    "talks": 28,
+    "speakers": 27,
+    "source": "ocr"
+  },
+  "1954": {
+    "talks": 32,
+    "speakers": 31,
+    "source": "ocr"
+  },
+  "1955": {
+    "talks": 36,
+    "speakers": 34,
+    "source": "ocr"
+  },
+  "1956": {
+    "talks": 37,
+    "speakers": 34,
+    "source": "ocr"
+  },
+  "1957": {
+    "talks": 30,
+    "speakers": 30,
+    "source": "ocr"
+  },
+  "1958": {
+    "talks": 42,
+    "speakers": 41,
+    "source": "ocr"
+  },
+  "1959": {
+    "talks": 30,
+    "speakers": 30,
+    "source": "ocr"
+  },
+  "1960": {
+    "talks": 33,
+    "speakers": 32,
+    "source": "ocr"
+  },
+  "1961": {
+    "talks": 39,
+    "speakers": 37,
+    "source": "ocr"
+  },
+  "1962": {
+    "talks": 40,
+    "speakers": 36,
+    "source": "ocr"
+  },
+  "1963": {
+    "talks": 36,
+    "speakers": 35,
+    "source": "ocr"
+  },
+  "1964": {
+    "talks": 49,
+    "speakers": 39,
+    "source": "ocr"
+  },
+  "1965": {
+    "talks": 31,
+    "speakers": 29,
+    "source": "ocr"
+  },
+  "1966": {
+    "talks": 37,
+    "speakers": 34,
+    "source": "ocr"
+  },
+  "1967": {
+    "talks": 30,
+    "speakers": 30,
+    "source": "ocr"
+  },
+  "1968": {
+    "talks": 32,
+    "speakers": 31,
+    "source": "ocr"
+  },
+  "1969": {
+    "talks": 43,
+    "speakers": 40,
+    "source": "ocr"
+  },
+  "1970": {
+    "talks": 35,
+    "speakers": 33,
+    "source": "ocr"
+  },
+  "1971": {
+    "talks": 43,
+    "speakers": 39,
+    "source": "web"
+  },
+  "1972": {
+    "talks": 42,
+    "speakers": 37,
+    "source": "web"
+  },
+  "1973": {
+    "talks": 39,
+    "speakers": 35,
+    "source": "web"
+  },
+  "1974": {
+    "talks": 42,
+    "speakers": 36,
+    "source": "web"
+  },
+  "1975": {
+    "talks": 50,
+    "speakers": 41,
+    "source": "web"
+  },
+  "1976": {
+    "talks": 51,
+    "speakers": 42,
+    "source": "web"
+  },
+  "1977": {
+    "talks": 36,
+    "speakers": 29,
+    "source": "web"
+  },
+  "1978": {
+    "talks": 43,
+    "speakers": 35,
+    "source": "web"
+  },
+  "1979": {
+    "talks": 38,
+    "speakers": 30,
+    "source": "web"
+  },
+  "1980": {
+    "talks": 44,
+    "speakers": 36,
+    "source": "web"
+  },
+  "1981": {
+    "talks": 39,
+    "speakers": 33,
+    "source": "web"
+  },
+  "1982": {
+    "talks": 35,
+    "speakers": 31,
+    "source": "web"
+  },
+  "1983": {
+    "talks": 33,
+    "speakers": 28,
+    "source": "web"
+  },
+  "1984": {
+    "talks": 35,
+    "speakers": 31,
+    "source": "web"
+  },
+  "1985": {
+    "talks": 34,
+    "speakers": 29,
+    "source": "web"
+  },
+  "1986": {
+    "talks": 32,
+    "speakers": 27,
+    "source": "web"
+  },
+  "1987": {
+    "talks": 32,
+    "speakers": 27,
+    "source": "web"
+  },
+  "1988": {
+    "talks": 34,
+    "speakers": 29,
+    "source": "web"
+  },
+  "1989": {
+    "talks": 35,
+    "speakers": 31,
+    "source": "web"
+  },
+  "1990": {
+    "talks": 37,
+    "speakers": 32,
+    "source": "web"
+  },
+  "1991": {
+    "talks": 38,
+    "speakers": 32,
+    "source": "web"
+  },
+  "1992": {
+    "talks": 38,
+    "speakers": 32,
+    "source": "web"
+  },
+  "1993": {
+    "talks": 36,
+    "speakers": 32,
+    "source": "web"
+  },
+  "1994": {
+    "talks": 35,
+    "speakers": 30,
+    "source": "web"
+  },
+  "1995": {
+    "talks": 38,
+    "speakers": 31,
+    "source": "web"
+  },
+  "1996": {
+    "talks": 33,
+    "speakers": 26,
+    "source": "web"
+  },
+  "1997": {
+    "talks": 36,
+    "speakers": 29,
+    "source": "web"
+  },
+  "1998": {
+    "talks": 37,
+    "speakers": 30,
+    "source": "web"
+  },
+  "1999": {
+    "talks": 37,
+    "speakers": 31,
+    "source": "web"
+  },
+  "2000": {
+    "talks": 38,
+    "speakers": 31,
+    "source": "web"
+  },
+  "2001": {
+    "talks": 37,
+    "speakers": 30,
+    "source": "web"
+  },
+  "2002": {
+    "talks": 34,
+    "speakers": 28,
+    "source": "web"
+  },
+  "2003": {
+    "talks": 35,
+    "speakers": 28,
+    "source": "web"
+  },
+  "2004": {
+    "talks": 36,
+    "speakers": 29,
+    "source": "web"
+  },
+  "2005": {
+    "talks": 37,
+    "speakers": 31,
+    "source": "web"
+  },
+  "2006": {
+    "talks": 42,
+    "speakers": 36,
+    "source": "web"
+  },
+  "2007": {
+    "talks": 42,
+    "speakers": 36,
+    "source": "web"
+  },
+  "2008": {
+    "talks": 36,
+    "speakers": 29,
+    "source": "web"
+  },
+  "2009": {
+    "talks": 38,
+    "speakers": 32,
+    "source": "web"
+  },
+  "2010": {
+    "talks": 38,
+    "speakers": 32,
+    "source": "web"
+  },
+  "2011": {
+    "talks": 38,
+    "speakers": 31,
+    "source": "web"
+  },
+  "2012": {
+    "talks": 38,
+    "speakers": 31,
+    "source": "web"
+  },
+  "2013": {
+    "talks": 38,
+    "speakers": 31,
+    "source": "web"
+  },
+  "2014": {
+    "talks": 38,
+    "speakers": 32,
+    "source": "web"
+  },
+  "2015": {
+    "talks": 39,
+    "speakers": 35,
+    "source": "web"
+  },
+  "2016": {
+    "talks": 37,
+    "speakers": 33,
+    "source": "web"
+  },
+  "2017": {
+    "talks": 35,
+    "speakers": 32,
+    "source": "web"
+  },
+  "2018": {
+    "talks": 33,
+    "speakers": 28,
+    "source": "web"
+  },
+  "2019": {
+    "talks": 35,
+    "speakers": 29,
+    "source": "web"
+  },
+  "2020": {
+    "talks": 35,
+    "speakers": 29,
+    "source": "web"
+  },
+  "2021": {
+    "talks": 40,
+    "speakers": 37,
+    "source": "web"
+  },
+  "2022": {
+    "talks": 36,
+    "speakers": 33,
+    "source": "web"
+  },
+  "2023": {
+    "talks": 33,
+    "speakers": 32,
+    "source": "web"
+  },
+  "2024": {
+    "talks": 35,
+    "speakers": 34,
+    "source": "web"
+  },
+  "2025": {
+    "talks": 34,
+    "speakers": 33,
+    "source": "web"
+  },
+  "2026": {
+    "talks": 37,
+    "speakers": 33,
+    "source": "web"
+  }
+}
