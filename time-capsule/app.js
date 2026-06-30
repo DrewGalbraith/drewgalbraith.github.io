@@ -166,8 +166,7 @@ async function updateForYear(year) {
             const ext = slcExts[slcAttempt];
             const img = new Image();
             img.onload = () => {
-                card.style.background = `#fff url('images/slc/${decade}s.${ext}') center/cover no-repeat`;
-                card.style.backgroundBlendMode = 'overlay';
+                card.style.background = `url('images/slc/${decade}s.${ext}') center/cover no-repeat`;
                 card.classList.add('has-backdrop');
             };
             img.onerror = trySlcImage;
