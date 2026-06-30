@@ -47,9 +47,6 @@
     letter-spacing: 0.03em;
     transition: color 0.15s;
 }
-.slider-year-display.highlight {
-    color: #e74c3c;
-}
 input[type="range"] {
     -webkit-appearance: none;
     appearance: none;

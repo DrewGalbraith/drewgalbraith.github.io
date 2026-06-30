@@ -407,10 +407,8 @@ yearSlider.addEventListener('input', () => {
     const year = parseInt(yearSlider.value);
     currentYear = year;
     yearDisplay.textContent = year;
-    yearDisplay.classList.add('highlight');
     clearTimeout(sliderTimeout);
     sliderTimeout = setTimeout(() => {
-        yearDisplay.classList.remove('highlight');
         updateForYear(year);
     }, 80);
 });
