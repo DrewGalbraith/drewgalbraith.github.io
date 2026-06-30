@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Mormon Time Capsule | Drew Galbraith</title>
+    <title>Discourse Dial | Drew Galbraith</title>
     <link rel="icon" type="image/png" href="/favicons/favicon-96x96.png" sizes="96x96">
     <link rel="icon" type="image/svg+xml" href="/favicons/favicon.svg">
     <link rel="shortcut icon" href="/favicons/favicon.ico">
@@ -38,69 +38,80 @@
     </header>
 
     <section class="time-capsule-hero">
-        <div class="container">
-            <h1>Mormon Time Capsule</h1>
+        <div class="time-capsule-container">
+            <h1>Discourse Dial</h1>
             <p>Slide through time to explore discourse around whatever interests you!</p>
         </div>
     </section>
 
     <div id="timeline-section" class="page-body">
-        <div class="container">
+        <div class="time-capsule-container">
             <!-- Year Slider -->
             <div class="slider-container">
                 <label for="year-slider">Select a Year</label>
-                <input type="range" id="year-slider" min="1850" max="2026" value="1900" step="1">
                 <div class="slider-year-display" id="year-display">1900</div>
-                <div class="year-markers">
-                    <span>1850</span>
-                    <span>1880</span>
-                    <span>1900</span>
-                    <span>1930</span>
-                    <span>1960</span>
-                    <span>1990</span>
-                    <span>2026</span>
-                </div>
-            </div>
-
-            <!-- Prophet Card -->
-            <div id="prophet-card" class="prophet-card">
-                <div id="prophet-portrait" class="prophet-portrait-placeholder">?</div>
-                <div id="prophet-order" class="prophet-order">—</div>
-                <h2 id="prophet-name">—</h2>
-                <div id="prophet-tenure" class="prophet-tenure"></div>
-            </div>
-
-            <!-- Gap Notice -->
-            <div id="gap-notice" class="gap-notice" style="display:none;">
-                <strong>Data Gap</strong> — We don't have conference talk data for this period yet.
-                Sources are being researched.
-            </div>
-
-            <!-- Stats -->
-            <div class="stats-bar">
-                <span>📚 <span id="talk-count" class="stat-value">—</span> talks</span>
-                <span>🎤 <span id="speaker-count" class="stat-value">—</span> speakers</span>
-                <span><span id="era-range" class="stat-value"></span></span>
-            </div>
-
-            <!-- Talk search / chat -->
-            <div id="chat-section">
-                <div class="chat-header">
-                    <span>💬 Ask About This Era</span>
-                    <span class="chat-year-label" id="chat-year-label">— 1900</span>
-                </div>
-                <div class="chat-messages" id="chat-messages">
-                    <div class="chat-message system-message">
-                        <div class="message-label">🔍 Time Capsule</div>
-                        <div class="message-text">
-                            Search talks from a specific year, or ask about what was taught during a period.
-                            Try typing something like <em>"show me 1900 talks"</em> or <em>"what did Lorenzo Snow teach?"</em>
-                        </div>
+                <div class="slider-track-wrap">
+                    <input type="range" id="year-slider" min="1850" max="2026" value="1900" step="1">
+                    <div class="year-markers" id="year-markers">
+                        <span>1850</span>
+                        <span>1880</span>
+                        <span>1900</span>
+                        <span>1930</span>
+                        <span>1960</span>
+                        <span>1990</span>
+                        <span>2026</span>
                     </div>
                 </div>
-                <div class="chat-input-area">
-                    <input type="text" id="chat-input" placeholder="Search talks or ask a question..." autocomplete="off">
-                    <button id="chat-send">Send</button>
+            </div>
+
+            <div class="timeline-grid">
+                <div class="timeline-panel timeline-panel--info">
+                    <!-- Prophet Card -->
+                    <div id="prophet-card" class="prophet-card">
+                        <div id="prophet-portrait" class="prophet-portrait-placeholder">?</div>
+                        <div class="prophet-identity">
+                            <div id="prophet-order" class="prophet-order">—</div>
+                            <h2 id="prophet-name">—</h2>
+                            <div id="prophet-tenure" class="prophet-tenure"></div>
+                        </div>
+                    </div>
+
+                    <!-- Gap Notice -->
+                    <div id="gap-notice" class="gap-notice" style="display:none;">
+                        <strong>Data Gap</strong> — We don't have conference talk data for this period yet.
+                        Sources are being researched.
+                    </div>
+
+                    <!-- Stats -->
+                    <div class="stats-bar">
+                        <span>📚 <span id="talk-count" class="stat-value">—</span> talks</span>
+                        <span>🎤 <span id="speaker-count" class="stat-value">—</span> speakers</span>
+                        <span><span id="era-range" class="stat-value"></span></span>
+                    </div>
+                </div>
+
+                <!-- Talk search / chat -->
+                <div id="chat-section" class="timeline-panel timeline-panel--chat">
+                    <div class="chat-header">
+                        <div class="chat-header-avatar" aria-hidden="true">🔍</div>
+                        <div class="chat-header-info">
+                            <span class="chat-header-title">Discourse Dial</span>
+                            <span class="chat-header-subtitle">Exploring <span id="chat-year-label">1900</span></span>
+                        </div>
+                    </div>
+                    <div class="chat-messages" id="chat-messages"></div>
+                    <div class="chat-footer">
+                        <div class="chat-quick-questions">
+                            <span class="chat-quick-label">Quick questions</span>
+                            <div class="chat-quick-chips" id="chat-quick-chips"></div>
+                        </div>
+                        <div class="chat-input-area">
+                            <textarea id="chat-input" rows="2" placeholder="Type your question..." autocomplete="off"></textarea>
+                            <button type="button" id="chat-send" aria-label="Send message">
+                                <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -141,6 +152,40 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="../js/scripts.js"></script>
     <script src="app.js?v=1"></script>
+    <script>
+    /* Local dev only: auto-reload when HTML/CSS/JS changes (works with python3 -m http.server) */
+    (function () {
+        const host = location.hostname;
+        if (host !== 'localhost' && host !== '127.0.0.1') return;
+
+        const watch = ['index.html', 'app.js'];
+        document.querySelectorAll('link[rel="stylesheet"]').forEach((link) => {
+            const href = link.getAttribute('href');
+            if (href && !/^https?:\/\//i.test(href)) watch.push(href);
+        });
+
+        const stamps = {};
+        let ready = false;
+
+        async function check() {
+            for (const file of watch) {
+                try {
+                    const res = await fetch(file, { method: 'HEAD', cache: 'no-store' });
+                    const stamp = res.headers.get('Last-Modified') || res.headers.get('ETag') || '';
+                    if (ready && stamps[file] !== stamp) {
+                        location.reload();
+                        return;
+                    }
+                    stamps[file] = stamp;
+                } catch (_) {}
+            }
+            ready = true;
+        }
+
+        check();
+        setInterval(check, 800);
+    })();
+    </script>
 </body>
 
 </html>

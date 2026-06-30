@@ -1,5 +1,5 @@
 /**
- * Mormon Time Capsule — App
+ * Discourse Dial — App
  * Low-latency timeline explorer for General Conference talks.
  */
 
@@ -32,6 +32,7 @@ let talkData = {};
 /* ─── DOM References ─── */
 const $ = (s) => document.querySelector(s);
 const yearSlider = $('#year-slider');
+const yearMarkers = $('#year-markers');
 const yearDisplay = $('#year-display');
 const prophetName = $('#prophet-name');
 const prophetTenure = $('#prophet-tenure');
@@ -45,6 +46,7 @@ const chatMessages = $('#chat-messages');
 const chatInput = $('#chat-input');
 const chatSend = $('#chat-send');
 const chatYearLabel = $('#chat-year-label');
+const chatQuickChips = $('#chat-quick-chips');
 const talkDetailOverlay = $('#talk-detail-overlay');
 const talkDetailTitle = $('#talk-detail-title');
 const talkDetailSpeaker = $('#talk-detail-speaker');
@@ -109,11 +111,30 @@ async function loadYearTalks(year) {
     return allTalks;
 }
 
+function positionYearMarkers() {
+    if (!yearMarkers || !yearSlider) return;
+    const min = parseInt(yearSlider.min, 10);
+    const max = parseInt(yearSlider.max, 10);
+    const range = max - min;
+    if (range <= 0) return;
+
+    yearMarkers.querySelectorAll('span').forEach((span) => {
+        const year = parseInt(span.textContent, 10);
+        const pct = ((year - min) / range) * 100;
+        span.style.left = `${pct}%`;
+        span.classList.remove('marker-start', 'marker-mid', 'marker-end');
+        if (year <= min) span.classList.add('marker-start');
+        else if (year >= max) span.classList.add('marker-end');
+        else span.classList.add('marker-mid');
+    });
+}
+
 /* ─── Display Update ─── */
 async function updateForYear(year) {
     // Update year display
     yearDisplay.textContent = year;
-    chatYearLabel.textContent = `— ${year}`;
+    chatYearLabel.textContent = year;
+    updateQuickQuestions(year);
 
     // Prophet
     const prophet = getProphet(year);
@@ -144,7 +165,6 @@ async function updateForYear(year) {
                 prophetPortrait.style.background = 'none';
                 prophetPortrait.style.border = 'none';
                 img.className = 'prophet-portrait';
-                img.style.border = '3px solid #fff';
                 prophetPortrait.appendChild(img);
             };
             img.onerror = tryProphetImage;
@@ -240,57 +260,129 @@ function ordinal(n) {
 }
 
 /* ─── Chat / Search ─── */
-function addMessage(type, html) {
-    const div = document.createElement('div');
-    div.className = `chat-message ${type}-message`;
-    div.innerHTML = html;
-    chatMessages.appendChild(div);
+const QUICK_ACTION_ALL = '__all__';
+const QUICK_ACTION_SPEAKERS = '__speakers__';
+
+function getQuickQuestions(year) {
+    const prophet = getProphet(year);
+    const questions = [
+        { label: `Show all ${year} talks`, query: QUICK_ACTION_ALL },
+        { label: 'Talks about faith', query: 'faith' },
+        { label: 'Talks about repentance', query: 'repentance' },
+        { label: 'Who spoke this year?', query: QUICK_ACTION_SPEAKERS },
+    ];
+    if (prophet) {
+        questions.splice(1, 0, {
+            label: `What did ${prophet.name.split(' ').pop()} teach?`,
+            query: prophet.name.split(' ').pop(),
+        });
+    }
+    return questions;
+}
+
+function updateQuickQuestions(year) {
+    if (!chatQuickChips) return;
+    chatQuickChips.innerHTML = '';
+    getQuickQuestions(year).forEach(({ label, query }) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'chat-quick-chip';
+        btn.textContent = label;
+        btn.addEventListener('click', () => handleChat(year, query, label));
+        chatQuickChips.appendChild(btn);
+    });
+}
+
+function scrollChatToBottom() {
     chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
-function clearChat() {
+function addAgentMessage(html) {
+    const div = document.createElement('div');
+    div.className = 'chat-message agent-message';
+    div.innerHTML = `
+        <div class="chat-bubble-row agent">
+            <div class="chat-avatar" aria-hidden="true">🔍</div>
+            <div class="chat-bubble agent">${html}</div>
+        </div>
+    `;
+    chatMessages.appendChild(div);
+    scrollChatToBottom();
+}
+
+function addUserMessage(text) {
+    const div = document.createElement('div');
+    div.className = 'chat-message user-message';
+    div.innerHTML = `
+        <div class="chat-bubble-row user">
+            <div class="chat-bubble user">${escapeHtml(text)}</div>
+        </div>
+    `;
+    chatMessages.appendChild(div);
+    scrollChatToBottom();
+}
+
+function showWelcomeMessage(year) {
     chatMessages.innerHTML = '';
+    addAgentMessage(`
+        Hi! I can help you explore General Conference talks from <strong>${year}</strong>.
+        Pick a quick question below or type your own.
+    `);
+}
+
+function bindTalkResultClicks() {
+    document.querySelectorAll('.talk-result').forEach(el => {
+        el.addEventListener('click', () => {
+            const y = parseInt(el.dataset.year, 10);
+            const idx = parseInt(el.dataset.index, 10);
+            showTalkDetail(y, idx);
+        });
+    });
 }
 
 function showTalks(talks, year) {
     if (!talks || talks.length === 0) {
-        addMessage('system', `
-            <div class="message-label">🔍 Time Capsule</div>
-            <div class="message-text">No talks found for ${year}. ${inGap(year) ? 'This is a data gap period.' : ''}</div>
-        `);
+        addAgentMessage(`No talks found for ${year}. ${inGap(year) ? 'This is a data gap period.' : ''}`);
         return;
     }
 
-    addMessage('system', `
-        <div class="message-label">📚 Found ${talks.length} talks from ${year}</div>
-    `);
+    addAgentMessage(`Found <strong>${talks.length}</strong> talks from ${year}. Click one to read:`);
 
-    // Show first 15
     const count = Math.min(talks.length, 15);
     for (let i = 0; i < count; i++) {
         const t = talks[i];
         const excerpt = t.body && t.body[0] ? t.body[0].slice(0, 120) + '...' : '';
-        addMessage('talk', `
-            <div class="message-text talk-result" data-year="${year}" data-index="${i}">
-                <div class="talk-title">${t.title || '(untitled)'}</div>
-                <div class="talk-speaker">${t.speaker} <span class="talk-badge">${t._session || ''}</span></div>
-                <div class="talk-excerpt">${excerpt}</div>
+        const div = document.createElement('div');
+        div.className = 'chat-message talk-message';
+        div.innerHTML = `
+            <div class="chat-bubble-row agent">
+                <div class="chat-avatar" aria-hidden="true">📄</div>
+                <div class="chat-bubble talk-result" data-year="${year}" data-index="${i}">
+                    <div class="talk-title">${escapeHtml(t.title || '(untitled)')}</div>
+                    <div class="talk-speaker">${escapeHtml(t.speaker)} <span class="talk-badge">${t._session || ''}</span></div>
+                    <div class="talk-excerpt">${escapeHtml(excerpt)}</div>
+                </div>
             </div>
-        `);
+        `;
+        chatMessages.appendChild(div);
     }
 
     if (talks.length > 15) {
-        addMessage('system', `<div class="message-text">... and ${talks.length - 15} more talks</div>`);
+        addAgentMessage(`...and ${talks.length - 15} more talks. Try a narrower search.`);
     }
 
-    // Attach click handlers
-    document.querySelectorAll('.talk-result').forEach(el => {
-        el.addEventListener('click', () => {
-            const year = parseInt(el.dataset.year);
-            const idx = parseInt(el.dataset.index);
-            showTalkDetail(year, idx);
-        });
-    });
+    bindTalkResultClicks();
+    scrollChatToBottom();
+}
+
+function showSpeakers(talks, year) {
+    const speakers = [...new Set(talks.map(t => t.speaker).filter(Boolean))].sort();
+    if (speakers.length === 0) {
+        addAgentMessage(`No speaker data for ${year}.`);
+        return;
+    }
+    const list = speakers.map(s => `<li>${escapeHtml(s)}</li>`).join('');
+    addAgentMessage(`<strong>${speakers.length} speakers</strong> in ${year}:<ul class="chat-speaker-list">${list}</ul>`);
 }
 
 function searchTalks(year, query) {
@@ -304,69 +396,85 @@ function searchTalks(year, query) {
     });
 }
 
-async function handleChat(year) {
-    const query = chatInput.value.trim();
+function showSearchResults(results, year, query) {
+    if (results.length === 0) {
+        addAgentMessage(`No talks matching <em>"${escapeHtml(query)}"</em> in ${year}. Try another quick question or search term.`);
+        return;
+    }
+
+    addAgentMessage(`<strong>${results.length}</strong> talk${results.length > 1 ? 's' : ''} matching <em>"${escapeHtml(query)}"</em>:`);
+
+    const count = Math.min(results.length, 15);
+    for (let i = 0; i < count; i++) {
+        const t = results[i];
+        const excerpt = t.body && t.body[0] ? t.body[0].slice(0, 140) + '...' : '';
+        const origIdx = (talkData[year] || []).indexOf(t);
+        const div = document.createElement('div');
+        div.className = 'chat-message talk-message';
+        div.innerHTML = `
+            <div class="chat-bubble-row agent">
+                <div class="chat-avatar" aria-hidden="true">📄</div>
+                <div class="chat-bubble talk-result" data-year="${year}" data-index="${origIdx}">
+                    <div class="talk-title">${escapeHtml(t.title || '(untitled)')}</div>
+                    <div class="talk-speaker">${escapeHtml(t.speaker)} <span class="talk-badge">${t._session || ''}</span></div>
+                    <div class="talk-excerpt">${escapeHtml(excerpt)}</div>
+                </div>
+            </div>
+        `;
+        chatMessages.appendChild(div);
+    }
+
+    if (results.length > 15) {
+        addAgentMessage(`...and ${results.length - 15} more matches. Try a more specific search.`);
+    }
+
+    bindTalkResultClicks();
+    scrollChatToBottom();
+}
+
+async function handleChat(year, queryOverride, displayLabel) {
+    const query = queryOverride !== undefined ? String(queryOverride) : chatInput.value.trim();
     if (!query) return;
 
-    addMessage('user', `
-        <div class="message-label">You</div>
-        <div class="message-text">${escapeHtml(query)}</div>
-    `);
-    chatInput.value = '';
-    chatSend.disabled = true;
+    const userLabel = displayLabel || (queryOverride === undefined ? query : displayLabel || query);
+    if (queryOverride === QUICK_ACTION_ALL) {
+        addUserMessage(`Show all ${year} talks`);
+    } else if (queryOverride === QUICK_ACTION_SPEAKERS) {
+        addUserMessage('Who spoke this year?');
+    } else if (queryOverride !== undefined) {
+        addUserMessage(userLabel);
+    } else {
+        addUserMessage(query);
+    }
 
-    // Ensure data is loaded
+    if (queryOverride === undefined) {
+        chatInput.value = '';
+    }
+    chatSend.disabled = true;
+    chatQuickChips.querySelectorAll('button').forEach(b => { b.disabled = true; });
+
     let talks = talkData[year];
     if (!talks && hasTalks(year)) {
         talks = await loadYearTalks(year);
     }
 
     if (!talks || talks.length === 0) {
-        addMessage('system', `
-            <div class="message-label">🔍 Time Capsule</div>
-            <div class="message-text">No talk data available for ${year}.</div>
-        `);
+        addAgentMessage(`No talk data available for ${year} yet.`);
         chatSend.disabled = false;
+        chatQuickChips.querySelectorAll('button').forEach(b => { b.disabled = false; });
         return;
     }
 
-    const results = searchTalks(year, query);
-    if (results.length === 0) {
-        addMessage('system', `
-            <div class="message-label">🔍 Time Capsule</div>
-            <div class="message-text">No talks matching <em>"${escapeHtml(query)}"</em> in ${year}. Try a different search.</div>
-        `);
+    if (query === QUICK_ACTION_ALL) {
+        showTalks(talks, year);
+    } else if (query === QUICK_ACTION_SPEAKERS) {
+        showSpeakers(talks, year);
     } else {
-        addMessage('system', `
-            <div class="message-label">📚 ${results.length} talk${results.length > 1 ? 's' : ''} matching <em>"${escapeHtml(query)}"</em></div>
-        `);
-        const count = Math.min(results.length, 15);
-        for (let i = 0; i < count; i++) {
-            const t = results[i];
-            const excerpt = t.body && t.body[0] ? t.body[0].slice(0, 140) + '...' : '';
-            const origIdx = (talkData[year] || []).indexOf(t);
-            addMessage('talk', `
-                <div class="message-text talk-result" data-year="${year}" data-index="${origIdx}">
-                    <div class="talk-title">${t.title || '(untitled)'}</div>
-                    <div class="talk-speaker">${t.speaker} <span class="talk-badge">${t._session || ''}</span></div>
-                    <div class="talk-excerpt">${excerpt}</div>
-                </div>
-            `);
-        }
-        if (results.length > 15) {
-            addMessage('system', `<div class="message-text">... and ${results.length - 15} more matches</div>`);
-        }
-        // Re-bind click handlers
-        document.querySelectorAll('.talk-result').forEach(el => {
-            el.addEventListener('click', () => {
-                const y = parseInt(el.dataset.year);
-                const idx = parseInt(el.dataset.index);
-                showTalkDetail(y, idx);
-            });
-        });
+        showSearchResults(searchTalks(year, query), year, query);
     }
 
     chatSend.disabled = false;
+    chatQuickChips.querySelectorAll('button').forEach(b => { b.disabled = false; });
 }
 
 /* ─── Talk Detail Modal ─── */
@@ -416,7 +524,10 @@ yearSlider.addEventListener('input', () => {
 
 chatSend.addEventListener('click', () => handleChat(currentYear));
 chatInput.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') handleChat(currentYear);
+    if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        handleChat(currentYear);
+    }
 });
 
 talkDetailOverlay.addEventListener('click', (e) => {
@@ -441,5 +552,7 @@ async function init() {
         // Index not available, will load per-year individually
     }
     updateForYear(1900);
+    showWelcomeMessage(1900);
+    positionYearMarkers();
 }
 init();
