@@ -5,24 +5,24 @@
 
 /* ─── Prophet Data ─── */
 const PROPHETS = [
-    { name: "Joseph Smith",      start: 1830, end: 1844, order: 1,  emoji: "📜" },
-    { name: "Brigham Young",     start: 1847, end: 1877, order: 2,  emoji: "🧭" },
-    { name: "John Taylor",       start: 1880, end: 1887, order: 3,  emoji: "📖" },
-    { name: "Wilford Woodruff",  start: 1889, end: 1898, order: 4,  emoji: "📋" },
-    { name: "Lorenzo Snow",      start: 1898, end: 1901, order: 5,  emoji: "❄️"  },
-    { name: "Joseph F. Smith",   start: 1901, end: 1918, order: 6,  emoji: "📘" },
-    { name: "Heber J. Grant",    start: 1918, end: 1945, order: 7,  emoji: "🏦" },
-    { name: "George Albert Smith", start: 1945, end: 1951, order: 8,  emoji: "🕊️" },
-    { name: "David O. McKay",    start: 1951, end: 1970, order: 9,  emoji: "🌍" },
-    { name: "Joseph Fielding Smith", start: 1970, end: 1972, order: 10, emoji: "📚" },
-    { name: "Harold B. Lee",     start: 1972, end: 1973, order: 11, emoji: "⚡" },
-    { name: "Spencer W. Kimball", start: 1973, end: 1985, order: 12, emoji: "🔥" },
-    { name: "Ezra Taft Benson",  start: 1985, end: 1994, order: 13, emoji: "🏛️" },
-    { name: "Howard W. Hunter",  start: 1994, end: 1995, order: 14, emoji: "🕯️" },
-    { name: "Gordon B. Hinckley", start: 1995, end: 2008, order: 15, emoji: "😊" },
-    { name: "Thomas S. Monson",  start: 2008, end: 2018, order: 16, emoji: "🗣️" },
-    { name: "Russell M. Nelson", start: 2018, end: 2025, order: 17, emoji: "❤️"  },
-    { name: "Dallin H. Oaks",   start: 2025, end: 2026, order: 18, emoji: "⚖️" },
+    { name: "Joseph Smith",           nickname: "",                  start: 1830, end: 1844, order: 1,  emoji: "📜" },
+    { name: "Brigham Young",          nickname: "\"The Lion of the Lord\"",     start: 1847, end: 1877, order: 2,  emoji: "🧭" },
+    { name: "John Taylor",            nickname: "",                  start: 1880, end: 1887, order: 3,  emoji: "📖" },
+    { name: "Wilford Woodruff",       nickname: "",                  start: 1889, end: 1898, order: 4,  emoji: "📋" },
+    { name: "Lorenzo Snow",           nickname: "",                  start: 1898, end: 1901, order: 5,  emoji: "❄️" },
+    { name: "Joseph F. Smith",        nickname: "",                  start: 1901, end: 1918, order: 6,  emoji: "📘" },
+    { name: "Heber J. Grant",         nickname: "",                  start: 1918, end: 1945, order: 7,  emoji: "🏦" },
+    { name: "George Albert Smith",    nickname: "",                  start: 1945, end: 1951, order: 8,  emoji: "🕊️" },
+    { name: "David O. McKay",         nickname: "",                  start: 1951, end: 1970, order: 9,  emoji: "🌍" },
+    { name: "Joseph Fielding Smith",  nickname: "",                  start: 1970, end: 1972, order: 10, emoji: "📚" },
+    { name: "Harold B. Lee",          nickname: "",                  start: 1972, end: 1973, order: 11, emoji: "⚡" },
+    { name: "Spencer W. Kimball",     nickname: "",                  start: 1973, end: 1985, order: 12, emoji: "🔥" },
+    { name: "Ezra Taft Benson",       nickname: "",                  start: 1985, end: 1994, order: 13, emoji: "🏛️" },
+    { name: "Howard W. Hunter",       nickname: "",                  start: 1994, end: 1995, order: 14, emoji: "🕯️" },
+    { name: "Gordon B. Hinckley",     nickname: "",                  start: 1995, end: 2008, order: 15, emoji: "😊" },
+    { name: "Thomas S. Monson",       nickname: "",                  start: 2008, end: 2018, order: 16, emoji: "🗣️" },
+    { name: "Russell M. Nelson",      nickname: "\"The Heart Surgeon\"", start: 2018, end: 2025, order: 17, emoji: "❤️" },
+    { name: "Dallin H. Oaks",         nickname: "",                  start: 2025, end: 2026, order: 18, emoji: "⚖️" },
 ];
 
 /* ─── Corpus Index ─── */
@@ -121,6 +121,13 @@ async function updateForYear(year) {
         prophetName.textContent = prophet.name;
         prophetOrder.textContent = `${prophet.order}${ordinal(prophet.order)} President`;
         prophetTenure.textContent = `${prophet.start} – ${prophet.end}`;
+        const nicknameEl = document.getElementById('prophet-nickname');
+        if (prophet.nickname) {
+            nicknameEl.textContent = prophet.nickname;
+            nicknameEl.style.display = 'block';
+        } else {
+            nicknameEl.style.display = 'none';
+        }
         prophetPortrait.style.display = 'flex';
         prophetPortrait.style.alignItems = 'center';
         prophetPortrait.style.justifyContent = 'center';
@@ -180,6 +187,7 @@ async function updateForYear(year) {
         prophetName.textContent = '—';
         prophetOrder.textContent = '—';
         prophetTenure.textContent = '';
+        document.getElementById('prophet-nickname').style.display = 'none';
         prophetPortrait.textContent = '?';
     }
 
