@@ -1,4 +1,4 @@
-# Mormon Time Capsule
+# Discourse Dial
 
 Timeline slider + search interface for LDS General Conference talks (1850–present).
 
