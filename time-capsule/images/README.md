@@ -22,7 +22,8 @@ Name files as lowercase hyphenated: `firstname-lastname.jpg`
 | `howard-w-hunter.jpg` | Howard W. Hunter (1994–1995) |
 | `gordon-b-hinckley.jpg` | Gordon B. Hinckley (1995–2008) |
 | `thomas-s-monson.jpg` | Thomas S. Monson (2008–2018) |
-| `russell-m-nelson.jpg` | Russell M. Nelson (2018–present) |
+| `russell-m-nelson.jpg` | Russell M. Nelson (2018–2025) |
+| `dallin-h-oaks.jpg` | Dallin H. Oaks (2025–present) |
 
 Square crop preferred (will display as circle). ~300×300px is fine.
 

@@ -21,7 +21,8 @@ const PROPHETS = [
     { name: "Howard W. Hunter",  start: 1994, end: 1995, order: 14, emoji: "🕯️" },
     { name: "Gordon B. Hinckley", start: 1995, end: 2008, order: 15, emoji: "😊" },
     { name: "Thomas S. Monson",  start: 2008, end: 2018, order: 16, emoji: "🗣️" },
-    { name: "Russell M. Nelson", start: 2018, end: 2026, order: 17, emoji: "❤️"  },
+    { name: "Russell M. Nelson", start: 2018, end: 2025, order: 17, emoji: "❤️"  },
+    { name: "Dallin H. Oaks",   start: 2025, end: 2026, order: 18, emoji: "⚖️" },
 ];
 
 /* ─── Corpus Index ─── */
