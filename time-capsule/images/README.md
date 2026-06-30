@@ -11,7 +11,7 @@ Name files as lowercase hyphenated: `firstname-lastname.jpg`
 | `john-taylor.jpg` | John Taylor (1880–1887) |
 | `wilford-woodruff.jpg` | Wilford Woodruff (1889–1898) |
 | `lorenzo-snow.jpg` | Lorenzo Snow (1898–1901) |
-| `joseph-f-smith.jpg` | Joseph F. Smith (1901–1918) |
+| `joseph-f-smith.jpg` (missing) | Joseph F. Smith (1901–1918) — needs a separate portrait |
 | `heber-j-grant.jpg` | Heber J. Grant (1918–1945) |
 | `george-albert-smith.jpg` | George Albert Smith (1945–1951) |
 | `david-o-mckay.jpg` | David O. McKay (1951–1970) |

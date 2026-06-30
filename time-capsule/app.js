@@ -124,38 +124,56 @@ async function updateForYear(year) {
         prophetPortrait.style.alignItems = 'center';
         prophetPortrait.style.justifyContent = 'center';
         
-        // Try to load prophet image
+        // Try to load prophet image — try multiple extensions
         const slug = prophet.name.toLowerCase().replace(/\./g, '').replace(/\s+/g, '-');
-        const img = new Image();
-        img.onload = () => {
-            prophetPortrait.innerHTML = '';
-            prophetPortrait.style.background = 'none';
-            img.className = 'prophet-portrait';
-            prophetPortrait.appendChild(img);
-        };
-        img.onerror = () => {
-            // Fallback: initials + gradient
-            prophetPortrait.innerHTML = getInitials(prophet.name);
-            prophetPortrait.style.background =
-                `linear-gradient(135deg, hsl(${prophet.order * 21}, 60%, 40%), hsl(${prophet.order * 21 + 40}, 50%, 30%))`;
-        };
-        img.src = `images/prophets/${slug}.jpg`;
+        const exts = ['jpg', 'png', 'jpeg'];
+        let attemptIdx = 0;
+        
+        function tryProphetImage() {
+            if (attemptIdx >= exts.length) {
+                // Fallback: initials + gradient
+                prophetPortrait.innerHTML = getInitials(prophet.name);
+                prophetPortrait.style.background =
+                    `linear-gradient(135deg, hsl(${prophet.order * 21}, 60%, 40%), hsl(${prophet.order * 21 + 40}, 50%, 30%))`;
+                return;
+            }
+            const img = new Image();
+            img.onload = () => {
+                prophetPortrait.innerHTML = '';
+                prophetPortrait.style.background = 'none';
+                img.className = 'prophet-portrait';
+                prophetPortrait.appendChild(img);
+            };
+            img.onerror = tryProphetImage;
+            img.src = `images/prophets/${slug}.${exts[attemptIdx]}`;
+            attemptIdx++;
+        }
+        tryProphetImage();
         
         // Try to load SLC decade photo as backdrop
         const decade = Math.floor(year / 10) * 10;
-        const slcImg = new Image();
-        slcImg.onload = () => {
+        const slcExts = ['jpg', 'jpeg', 'png'];
+        let slcAttempt = 0;
+        
+        function trySlcImage() {
+            if (slcAttempt >= slcExts.length) {
+                document.getElementById('prophet-card').style.background = '#fff';
+                document.getElementById('prophet-card').classList.remove('has-backdrop');
+                return;
+            }
             const card = document.getElementById('prophet-card');
-            card.style.background = `#fff url('images/slc/${decade}s.jpg') center/cover no-repeat`;
-            card.style.backgroundBlendMode = 'overlay';
-            card.classList.add('has-backdrop');
-        };
-        slcImg.onerror = () => {
-            // No SLC photo — plain white background
-            document.getElementById('prophet-card').style.background = '#fff';
-            document.getElementById('prophet-card').classList.remove('has-backdrop');
-        };
-        slcImg.src = `images/slc/${decade}s.jpg`;
+            const ext = slcExts[slcAttempt];
+            const img = new Image();
+            img.onload = () => {
+                card.style.background = `#fff url('images/slc/${decade}s.${ext}') center/cover no-repeat`;
+                card.style.backgroundBlendMode = 'overlay';
+                card.classList.add('has-backdrop');
+            };
+            img.onerror = trySlcImage;
+            img.src = `images/slc/${decade}s.${ext}`;
+            slcAttempt++;
+        }
+        trySlcImage();
     } else {
         prophetName.textContent = '—';
         prophetOrder.textContent = '—';
