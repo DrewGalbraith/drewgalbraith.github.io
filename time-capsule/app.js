@@ -209,9 +209,9 @@ async function updateForYear(year) {
     }
 
     if (year >= 1897 && year <= 1970) {
-        eraRange.innerHTML = '<a href="https://www.churchofjesuschrist.org/study/general-conference/" target="_blank" rel="noopener">General Conference archive</a>';
+        eraRange.innerHTML = 'Source: <a href="https://www.churchofjesuschrist.org/study/general-conference/" target="_blank" rel="noopener">General Conference archive</a>';
     } else if (year >= 1971 && year <= 2026) {
-        eraRange.textContent = 'LDS.org';
+        eraRange.textContent = 'Source: Official LDS website';
     } else if (inGap(year)) {
         eraRange.textContent = '⏳ Gap';
     } else {
