@@ -119,7 +119,7 @@ async function updateForYear(year) {
     const prophet = getProphet(year);
     if (prophet) {
         prophetName.textContent = prophet.name;
-        prophetOrder.textContent = `${prophet.emoji} ${prophet.order}${ordinal(prophet.order)} President`;
+        prophetOrder.textContent = `${prophet.order}${ordinal(prophet.order)} President`;
         prophetTenure.textContent = `${prophet.start} – ${prophet.end}`;
         prophetPortrait.style.display = 'flex';
         prophetPortrait.style.alignItems = 'center';
