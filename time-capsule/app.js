@@ -142,7 +142,9 @@ async function updateForYear(year) {
             img.onload = () => {
                 prophetPortrait.innerHTML = '';
                 prophetPortrait.style.background = 'none';
+                prophetPortrait.style.border = 'none';
                 img.className = 'prophet-portrait';
+                img.style.border = '3px solid #fff';
                 prophetPortrait.appendChild(img);
             };
             img.onerror = tryProphetImage;
