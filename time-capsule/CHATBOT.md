@@ -139,17 +139,86 @@ On the server: rsync, git pull, or cron job to rebuild the search index from the
 4. **History** — pass last 2–3 turns for follow-ups
 5. **Better index** — BM25 or embeddings; then cross-year if needed
 
-## Security & cost notes
+## Security & Cost Controls
 
-- Never commit API keys; use server environment variables only
-- Log questions and token usage, not secrets
-- Instruct the model to quote cautiously — older talks are OCR'd and may have errors
-- Prefer answers that cite specific talks (speaker, year, session)
+### Threat model
+
+The frontend is public JS — anyone can inspect it, find the API endpoint, and send forged requests. Protection is defense-in-depth, not any single gate.
+
+### Input limits (multi-layer)
+
+| Layer | Limit | Enforced by |
+|-------|-------|-------------|
+| User message length | 500 chars max | Frontend (disable send) + backend (reject) |
+| Corpus context | ~8K tokens (top-k relevant excerpts) | Backend retrieval stage |
+| Max output tokens | 1,024 per response | LLM API call param |
+| Max conversation history | Last 3 turns only | Backend history trimming |
+
+These prevent context-window attacks and keep per-request cost under ~$0.01 (v4-flash pricing: $0.14/M input, $0.28/M output).
+
+### Rate limiting (per-IP)
+
+Exponential backoff implemented in server middleware:
+
+| Request count in window | Behaviour |
+|------------------------|-----------|
+| 1–5 / minute | Normal — pass through |
+| 6–10 / minute | 429 + block for 60s |
+| 11+ / minute | 429 + block for 5 minutes |
+| Sustained abuse | Block for 1 hour (resets after quiet period) |
+
+Rate limit windows tracked per IP with a sliding window counter (in-memory; resets on server restart).
+
+### CORS
+
+Only the following origins are allowed:
+- `https://drewgalbraith.github.io`
+- Any custom domain if added later
+
+This stops random websites from hitting the API from user browsers. It does **not** stop server-side scripts — that's what rate limiting + the dedicated key handle.
+
+### Daily token budget
+
+The server tracks total tokens spent (input + output) per UTC day:
+
+- **Soft limit:** $2/day — logs warning
+- **Hard limit:** $5/day — returns 429 on all `/chat` requests until midnight UTC
+
+Reset counter stored in a flat file (survives server restarts). Configurable via `MAX_DAILY_COST` env var.
+
+### DeepSeek-side protections
+
+- **Dedicated API key** — named "time-capsule" in the DeepSeek dashboard. Usage is fully auditable per key.
+- **`user_id` parameter** — each request passes `user_id` (random session ID from browser). DeepSeek uses this for:
+  - Content safety isolation
+  - KV cache isolation per user
+  - Rate limit isolation per user
+- **Small account balance** — only keep $10–20 topped up. Acts as a natural hard cap — if abused, the account runs out of funds and the API stops.
+- **Check key-level spending caps** on DeepSeek's platform dashboard — if they support per-key hard limits, enable that too.
+
+### API key management
+
+- `DEEPSEEK_API_KEY` set on the server only (environment variable)
+- Never committed to any repo or exposed to the frontend
+- Separate key from any other projects for clean audit trail
+
+### Token cost estimates
+
+At v4-flash pricing ($0.14/M input, $0.28/M output), assuming ~2K input + 500 output per chat:
+
+| Usage | Daily cost | Monthly cost |
+|-------|-----------|-------------|
+| Light (50 chats/day) | ~$0.02 | ~$0.60 |
+| Moderate (200 chats/day) | ~$0.08 | ~$2.40 |
+| Heavy (1,000 chats/day) | ~$0.42 | ~$12.60 |
+
+A $20 balance covers months of normal use and acts as a hard stop if abused. 
 
 ## Open decisions
 
-- [ ] Cloud stack (Python / Node / Docker / nginx reverse proxy)
-- [ ] LLM provider (OpenAI, Anthropic, etc.)
-- [ ] v1 scope: selected year only vs cross-year
-- [ ] API base URL and domain
-- [ ] Auth beyond CORS + rate limit (optional header secret)
+- ~~Cloud stack~~ → **FastAPI + uvicorn** (fits existing Python corpus tooling)
+- ~~LLM provider~~ → **DeepSeek v4-flash** (currently provisioned, cheap at $0.14/M input)
+- ~~v1 scope~~ → **Single year retrieval** (the selected slider year), cross-year later
+- ~~API base URL~~ → TBD (your VPS IP/domain + port)
+- ~~Auth beyond CORS~~ → None (rely on rate limiting + daily budget + dedicated key)
+- [ ] Verify DeepSeek supports per-key spending caps on their platform dashboard
