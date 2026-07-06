@@ -124,11 +124,17 @@ BAD_PREFIX = (
 
 BAD_PATTERNS = [
     re.compile(r"^[A-Z\s]{25,}$"),                # very long = masthead
-    re.compile(r"^[A-Z. ]+(CO\.|BRO\.|& SON|& SONS)\.?$"),  # companies
+    re.compile(r"^[A-Z. ]+(CO\.|BRO\.|& SON|& SONS)\s*\.?$"),  # companies
     re.compile(r"^[A-Z ]+(DEPT|COMPANY|CORPORATION|ASSOCIATION|SOCIETY|BANK|TRUST|INSURANCE)"),
     re.compile(r"^[A-Z ]+ (LUMBER|FURNITURE|HARDWARE|DRY GOODS|GROCERY|MILL|PRESS)"),
     re.compile(r"^(ILLUSTRATED|SEND FOR|PRICE|CENTS|SAMPLES|CIRCULARS)"),
     re.compile(r".*\d{3,}.*"),                    # has 3+ digits in a row
+    re.compile(r"^[A-Z .]+\)"),                   # closing paren = ad
+    re.compile(r"YOU WILL FIND", re.IGNORECASE),  # ad language
+    re.compile(r"\bMAIL ORDERS?\b", re.IGNORECASE),     # mail-order ads
+    re.compile(r"\bCATALOG(UE)?\b", re.IGNORECASE),
+    re.compile(r"\b(FUNERAL|MORTUARY|CEMETERY)\b", re.IGNORECASE),
+    re.compile(r"^(PART|SECTION|CHAPTER|LESSON)\s+(FIRST|SECOND|THIRD|FOURTH|FIFTH|[IVXLCDM]+\b)", re.IGNORECASE),
 ]
 
 
